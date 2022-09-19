@@ -1,6 +1,6 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
-import morgan from 'morgan';
+import morgan from "morgan";
 import createError from "http-errors";
 
 dotenv.config();
