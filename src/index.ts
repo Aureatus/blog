@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
   res.send("Express + TypeScript Server TEST");
 });
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
