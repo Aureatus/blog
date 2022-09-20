@@ -4,6 +4,7 @@ import morgan from "morgan";
 import createError from "http-errors";
 
 import authRouter from "./routes/auth";
+import blogRouter from "./routes/blog";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", authRouter);
+app.use("/blogs", blogRouter);
 
 app.use((req, res, next) => {
   next(createError(404));
