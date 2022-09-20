@@ -5,6 +5,7 @@ import createError from "http-errors";
 
 import authRouter from "./routes/auth";
 import blogRouter from "./routes/blog";
+import commentRouter from "./routes/comment";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 
 app.use("/", authRouter);
 app.use("/blogs", blogRouter);
+app.use("/comments", commentRouter);
 
 app.use((req, res, next) => {
   next(createError(404));
