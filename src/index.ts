@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import createError from "http-errors";
 
+import authRouter from "./routes/auth";
+
 dotenv.config();
 
 const app: Express = express();
@@ -13,6 +15,8 @@ app.use(morgan("dev"));
 app.get("/", (req, res) => {
   res.send("Express + TypeScript Server TEST");
 });
+
+app.use("/", authRouter);
 
 app.use((req, res, next) => {
   next(createError(404));
