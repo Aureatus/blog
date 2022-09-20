@@ -10,8 +10,6 @@ blogRouter.get("/", placeHolderResponse); // Return published blogs with title, 
 
 blogRouter.get("/:id", placeHolderResponse); // Return blog of provided id with title, content, author and timestamp.
 
-blogRouter.get("/:id/comments", placeHolderResponse); // Return all comments for blog of provided id.
-
 blogRouter.put("/:id/update", placeHolderResponse); // Update  blog of provided id if user is same as blog author or is admin.
 
 blogRouter.post("/create", placeHolderResponse); // Create blog if user is logged in.
