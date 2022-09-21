@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import express, { Express, urlencoded, json } from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import createError from "http-errors";
@@ -14,6 +14,9 @@ const app: Express = express();
 const port = process.env.PORT;
 
 app.use(morgan("dev"));
+
+app.use(urlencoded({ extended: false }));
+app.use(json());
 
 const mongoDB = process.env.mongoConnectionURL;
 if (mongoDB) {
