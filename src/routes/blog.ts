@@ -1,4 +1,4 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
 
 import {
   blogListGet,
@@ -9,10 +9,6 @@ import {
 } from "../controllers/blog";
 
 const blogRouter = Router();
-
-const placeHolderResponse = (req: Request, res: Response) => {
-  res.send("test");
-};
 
 blogRouter.get("/", blogListGet); // Return published blogs with title, author and timestamp.
 
