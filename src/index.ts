@@ -3,6 +3,9 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import createError from "http-errors";
 import { connect, connection } from "mongoose";
+import passport from "passport";
+
+import loginStrategy from "./Strategies/login";
 
 import authRouter from "./routes/auth";
 import blogRouter from "./routes/blog";
@@ -25,6 +28,8 @@ if (mongoDB) {
   // eslint-disable-next-line no-console
   db.on("error", console.error.bind(console, "MongoDB connection error: "));
 }
+
+passport.use("login", loginStrategy);
 
 app.get("/", (req, res) => {
   res.send("Express + TypeScript Server TEST");
