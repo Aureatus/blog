@@ -1,13 +1,34 @@
 import { NextFunction, Request, Response } from "express";
 import { body, validationResult } from "express-validator";
+import passport from "passport";
+import { sign } from "jsonwebtoken";
+
 import User from "../models/user";
 
 const loginPost = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    return res.send("test");
-  } catch (err) {
-    return next(err);
-  }
+  // eslint-disable-next-line consistent-return
+  passport.authenticate("login", async (err, user) => {
+    try {
+      if (err || !user) {
+        const error = new Error("An error occurred.");
+
+        return next(error);
+      }
+
+      req.login(user, { session: false }, async (error) => {
+        if (error) return next(error);
+
+        // eslint-disable-next-line no-underscore-dangle
+        const secret = process.env.jsonWebTokenSecret;
+        let token;
+        if (secret) token = sign({ user }, secret);
+
+        return res.json({ token });
+      });
+    } catch (error) {
+      return next(error);
+    }
+  })(req, res, next);
 };
 
 const logoutPost = async (req: Request, res: Response, next: NextFunction) => {
