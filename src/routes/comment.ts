@@ -7,7 +7,7 @@ const protectedRoute = passport.authenticate("jwt", { session: false });
 
 const commentRouter = Router();
 
-commentRouter.get("/blogs/:id", commentListGet); // Return all comments where post matches provided id.
+commentRouter.get("/blog/:id", commentListGet); // Return all comments where post matches provided id.
 
 commentRouter.post("/:id/create/", protectedRoute, commentCreate); // Create comment for post of provided id if user is logged in.
 
