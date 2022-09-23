@@ -23,7 +23,7 @@ const loginPost = async (req: Request, res: Response, next: NextFunction) => {
         let token;
         if (secret) token = sign({ user }, secret);
 
-        return res.json({ token });
+        return res.json({ token: `Bearer ${token}` });
       });
     } catch (error) {
       return next(error);
