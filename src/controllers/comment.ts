@@ -8,7 +8,8 @@ const commentListGet = async (
   next: NextFunction
 ) => {
   try {
-    return res.send("test");
+    const comments = await Comment.find({ post: req.params.id });
+    return res.status(200).send(comments);
   } catch (err) {
     return next(err);
   }
