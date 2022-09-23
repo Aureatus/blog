@@ -21,6 +21,6 @@ blogRouter.put("/:id/update", protectedRoute, blogUpdate); // Update  blog of pr
 
 blogRouter.post("/create", protectedRoute, blogCreate); // Create blog if user is logged in.
 
-blogRouter.post("/:id/delete", protectedRoute, blogDelete); // Delete blog of provided id if user is same as blog author or is admin.
+blogRouter.delete("/:id/delete", protectedRoute, blogDelete); // Delete blog of provided id if user is same as blog author or is admin.
 
 export default blogRouter;
