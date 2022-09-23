@@ -17,7 +17,8 @@ const blogDetailGet = async (
   next: NextFunction
 ) => {
   try {
-    return res.send("test");
+    const postList = await Post.find({ _id: req.params.id });
+    return res.status(200).send(postList);
   } catch (err) {
     return next(err);
   }
