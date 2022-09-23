@@ -10,6 +10,7 @@ import loginStrategy from "./strategies/login";
 import authRouter from "./routes/auth";
 import blogRouter from "./routes/blog";
 import commentRouter from "./routes/comment";
+import JWTStrategy from "./strategies/JWT";
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ if (mongoDB) {
 }
 
 passport.use("login", loginStrategy);
+passport.use(JWTStrategy);
 
 app.get("/", (req, res) => {
   res.send("Express + TypeScript Server TEST");
