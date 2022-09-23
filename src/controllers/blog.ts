@@ -4,7 +4,8 @@ import Post from "../models/post";
 
 const blogListGet = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    return res.send("test");
+    const postList = await Post.find({}, `title timestamp author`);
+    return res.status(200).send(postList);
   } catch (err) {
     return next(err);
   }
