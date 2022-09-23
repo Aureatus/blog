@@ -22,13 +22,44 @@ const blogDetailGet = async (
   }
 };
 
-const blogUpdate = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    return res.send("test");
-  } catch (err) {
-    return next(err);
-  }
-};
+const blogUpdate = [
+  body("title").isString().notEmpty().trim().escape(),
+  body("content").isString().notEmpty().trim().escape(),
+  body("published").isBoolean(),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { _id, admin }: any = req.user;
+
+      const post = await Post.findById(req.params.id);
+
+      if (!post) return res.status(404).send("Post doesn't exist");
+
+      if (
+        post.author &&
+        JSON.stringify(post.author).replace(/"/g, "") === _id
+      ) {
+        post.updateOne({
+          title: req.body.title,
+          content: req.body.content,
+          published: req.body.published,
+        });
+        return res.sendStatus(200);
+      }
+
+      if (admin) {
+        post.updateOne({
+          title: req.body.title,
+          content: req.body.content,
+          published: req.body.published,
+        });
+        return res.sendStatus(200);
+      }
+      return res.status(401).send("You aren't the creator of this post.");
+    } catch (err) {
+      return next(err);
+    }
+  },
+];
 
 const blogCreate = [
   body("title").isString().notEmpty().trim().escape(),
