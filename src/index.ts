@@ -5,7 +5,7 @@ import createError from "http-errors";
 import { connect, connection } from "mongoose";
 import passport from "passport";
 
-import loginStrategy from "./Strategies/login";
+import loginStrategy from "./strategies/login";
 
 import authRouter from "./routes/auth";
 import blogRouter from "./routes/blog";
