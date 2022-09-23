@@ -63,7 +63,20 @@ const blogCreate = [
 
 const blogDelete = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    return res.send("test");
+    const { _id, admin }: any = req.user;
+
+    const post = await Post.findById(req.params.id);
+    if (!post) return res.status(404).send("Post doesn't exist");
+
+    if (post.author && JSON.stringify(post.author).replace(/"/g, "") === _id) {
+      post.delete();
+      return res.sendStatus(200);
+    }
+    if (admin) {
+      post.delete();
+      return res.sendStatus(200);
+    }
+    return res.status(401).send("You aren't the creator of this post.");
   } catch (err) {
     return next(err);
   }
