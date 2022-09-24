@@ -13,7 +13,10 @@
     "airbnb-typescript",
     "prettier"
   ],
-  "rules": { "react/react-in-jsx-scope": "off" },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/function-component-definition": "off"
+  },
   "env": {
     "browser": true,
     "es2021": true
