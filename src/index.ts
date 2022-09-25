@@ -1,7 +1,6 @@
 import express, { Express, urlencoded, json } from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
-import createError from "http-errors";
 import { connect, connection } from "mongoose";
 import passport from "passport";
 import cors from "cors";
@@ -45,7 +44,7 @@ app.use("/blogs", blogRouter);
 app.use("/comments", commentRouter);
 
 app.use((req, res, next) => {
-  next(createError(404));
+  next(res.status(404));
 });
 
 app.listen(port, () => {
