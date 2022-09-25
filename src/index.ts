@@ -4,6 +4,7 @@ import morgan from "morgan";
 import createError from "http-errors";
 import { connect, connection } from "mongoose";
 import passport from "passport";
+import cors from "cors";
 
 import loginStrategy from "./strategies/login";
 
@@ -21,6 +22,8 @@ app.use(morgan("dev"));
 
 app.use(urlencoded({ extended: false }));
 app.use(json());
+
+app.use(cors());
 
 const mongoDB = process.env.mongoConnectionURL;
 if (mongoDB) {
