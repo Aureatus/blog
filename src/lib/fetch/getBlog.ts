@@ -1,4 +1,4 @@
-const fetchBlog = async (id: string) => {
+const getBlog = async (id: string) => {
   try {
     const response = await fetch(`http://localhost:3000/blogs/${id}`);
     return await response.json();
@@ -8,4 +8,4 @@ const fetchBlog = async (id: string) => {
   }
 };
 
-export default fetchBlog;
+export default getBlog;
