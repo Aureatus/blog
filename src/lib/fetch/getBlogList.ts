@@ -1,4 +1,4 @@
-const fetchBlogList = async () => {
+const getBlogList = async () => {
   try {
     const response = await fetch("http://localhost:3000/blogs");
     return await response.json();
@@ -8,4 +8,4 @@ const fetchBlogList = async () => {
   }
 };
 
-export default fetchBlogList;
+export default getBlogList;
