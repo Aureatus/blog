@@ -1,4 +1,4 @@
-const fetchComments = async (id: string) => {
+const getComments = async (id: string) => {
   try {
     const response = await fetch(`http://localhost:3000/comments/blog/${id}`);
     return await response.json();
@@ -8,4 +8,4 @@ const fetchComments = async (id: string) => {
   }
 };
 
-export default fetchComments;
+export default getComments;
