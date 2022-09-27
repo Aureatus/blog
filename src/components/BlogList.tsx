@@ -17,7 +17,24 @@ const BlogList = () => {
 
   if (typeof data === "string") return <p>{data}</p>;
 
-  return <div />;
+  return (
+    <>
+      {data.map((blog: BlogInterface) => {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { title, timestamp, author, published, _id } = blog;
+
+        if (!published) return null;
+
+        return (
+          <div key={_id}>
+            <h1>{title}</h1>
+            <p>{new Date(timestamp).toDateString()}</p>
+            <p>{author}</p>
+          </div>
+        );
+      })}
+    </>
+  );
 };
 
 export default BlogList;
