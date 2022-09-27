@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import getBlogList from "../lib/fetch/getBlogList";
 
 interface BlogInterface {
@@ -26,11 +27,11 @@ const BlogList = () => {
         if (!published) return null;
 
         return (
-          <div key={_id}>
+          <Link key={_id} to={_id}>
             <h1>{title}</h1>
             <p>{new Date(timestamp).toDateString()}</p>
             <p>{author}</p>
-          </div>
+          </Link>
         );
       })}
     </>
