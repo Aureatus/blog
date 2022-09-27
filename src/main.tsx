@@ -6,6 +6,7 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
+import BlogList from "./components/BlogList";
 
 const queryClient = new QueryClient();
 
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     index: true,
     element: <Navigate to="/blogs" replace />,
+  },
+  {
+    path: "/blogs",
+    element: <BlogList />,
   },
 ]);
 
