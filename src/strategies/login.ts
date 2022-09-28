@@ -8,7 +8,7 @@ const loginStrategy = new Strategy(
       const user = await User.findOne({ user_name: userName });
 
       if (!user) {
-        return done(null, "false", { message: "User not found" });
+        return done(null, false, { message: "User not found" });
       }
 
       const validate = await user.isValidPassword(password);
