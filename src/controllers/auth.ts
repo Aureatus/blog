@@ -7,12 +7,10 @@ import User from "../models/user";
 
 const loginPost = async (req: Request, res: Response, next: NextFunction) => {
   // eslint-disable-next-line consistent-return
-  passport.authenticate("login", async (err, user) => {
+  passport.authenticate("login", async (err, user, { message }) => {
     try {
       if (err || !user) {
-        const error = new Error("An error occurred.");
-
-        return next(error);
+        return res.status(401).send(await message);
       }
 
       req.login(user, { session: false }, async (error) => {
