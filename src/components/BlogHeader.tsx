@@ -7,7 +7,7 @@ const BlogHeader = () => {
   return (
     <header>
       <h1>Blog project</h1>
-      {user ? <Link to="/login">Login</Link> : <Logout />}
+      {user ? <Logout /> : <Link to="/login">Login</Link>}
     </header>
   );
 };
