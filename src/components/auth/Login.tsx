@@ -1,9 +1,12 @@
 import { useState, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import postLogin from "../../lib/fetch/auth/postLogin";
 
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const login = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -11,6 +14,7 @@ const Login = () => {
       const loginResponse = await postLogin(userName, password);
       const bearerToken = await loginResponse.token;
       localStorage.setItem("bearerToken", bearerToken);
+      navigate("/blogs");
     } catch (err) {
       console.log(err);
     }
