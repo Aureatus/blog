@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import { useState } from "react";
 import Login from "./components/auth/Login";
 import BlogDetail from "./components/BlogDetail/BlogDetail";
 import BlogHeader from "./components/BlogHeader";
@@ -12,6 +13,10 @@ import BlogList from "./components/BlogList";
 
 const App = () => {
   const queryClient = new QueryClient();
+
+  const [user, setUser] = useState<string | null>(
+    localStorage.getItem("bearerToken")
+  );
 
   const router = createBrowserRouter([
     {
