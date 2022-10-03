@@ -27,7 +27,7 @@ const App = () => {
       path: "/blogs",
       element: (
         <>
-          <BlogHeader />
+          <BlogHeader user={user} setUser={setUser} />
           <BlogList />
         </>
       ),
@@ -36,7 +36,7 @@ const App = () => {
       path: "/blogs/:blogId",
       element: (
         <>
-          <BlogHeader />
+          <BlogHeader user={user} setUser={setUser} />
           <BlogDetail />
         </>
       ),
@@ -44,7 +44,7 @@ const App = () => {
     },
     {
       path: "/login",
-      element: <Login />,
+      element: <Login user={user} setUser={setUser} />,
     },
   ]);
 
