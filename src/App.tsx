@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Login from "./components/auth/Login";
 import BlogDetail from "./components/BlogDetail/BlogDetail";
 import BlogHeader from "./components/BlogHeader";
@@ -17,6 +17,14 @@ const App = () => {
   const [user, setUser] = useState<string | null>(
     localStorage.getItem("bearerToken")
   );
+
+  useEffect(() => {
+    if (user === null) {
+      localStorage.removeItem("bearerToken");
+    } else if (localStorage.getItem("bearerToken") !== user) {
+      localStorage.setItem("bearerToken", user);
+    }
+  }, [user]);
 
   const router = createBrowserRouter([
     {
