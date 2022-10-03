@@ -1,13 +1,14 @@
-const Logout = () => {
-  const logout = () => {
-    localStorage.removeItem("bearerToken");
-  };
+import UserStateInterface from "../../interfaces/UserStateInterface";
 
-  return (
-    <button type="button" onClick={logout}>
-      Logout
-    </button>
-  );
-};
+const Logout = ({ setUser }: UserStateInterface) => (
+  <button
+    type="button"
+    onClick={() => {
+      setUser(null);
+    }}
+  >
+    Logout
+  </button>
+);
 
 export default Logout;
