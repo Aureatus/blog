@@ -45,7 +45,7 @@ const App = () => {
       element: (
         <>
           <BlogHeader user={user} setUser={setUser} />
-          <BlogDetail />
+          <BlogDetail user={user} />
         </>
       ),
       loader: ({ params }) => params.blogId,
