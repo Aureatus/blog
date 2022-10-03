@@ -1,15 +1,12 @@
 import { Link } from "react-router-dom";
+import UserStateInterface from "../interfaces/UserStateInterface";
 import Logout from "./auth/LogoutButton";
 
-const BlogHeader = () => {
-  const user = localStorage.getItem("bearerToken");
-
-  return (
-    <header>
-      <h1>Blog project</h1>
-      {user ? <Logout /> : <Link to="/login">Login</Link>}
-    </header>
-  );
-};
+const BlogHeader = ({ user, setUser }: UserStateInterface) => (
+  <header>
+    <h1>Blog project</h1>
+    {user ? <Logout setUser={setUser} /> : <Link to="/login">Login</Link>}
+  </header>
+);
 
 export default BlogHeader;
