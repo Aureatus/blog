@@ -1,19 +1,18 @@
 import { useLoaderData } from "react-router-dom";
+import UserStateInterface from "../../interfaces/UserStateInterface";
 import BlogInfo from "./BlogInfo";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 
-const BlogDetail = () => {
+const BlogDetail = ({ user }: UserStateInterface) => {
   const blogId = useLoaderData();
   if (typeof blogId !== "string") return <p>Invalid id type</p>;
-
-  const user = localStorage.getItem("bearerToken");
 
   return (
     <div>
       <BlogInfo blogId={blogId} />
       <CommentList blogId={blogId} />
-      {user ? <CommentForm /> : null}
+      {user ? <CommentForm user={user} /> : null}
     </div>
   );
 };
