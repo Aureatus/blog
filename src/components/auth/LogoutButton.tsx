@@ -4,7 +4,7 @@ const Logout = ({ setUser }: UserStateInterface) => (
   <button
     type="button"
     onClick={() => {
-      setUser(null);
+      if (setUser) setUser(null);
     }}
   >
     Logout

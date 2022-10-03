@@ -14,7 +14,7 @@ const Login = ({ setUser }: UserStateInterface) => {
     try {
       const loginResponse = await postLogin(userName, password);
       const bearerToken = await loginResponse.token;
-      setUser(bearerToken);
+      if (setUser) setUser(bearerToken);
       navigate("/blogs");
     } catch (err) {
       console.log(err);
