@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import UserStateInterface from "../../interfaces/UserStateInterface";
 import postLogin from "../../lib/fetch/auth/postLogin";
 
-const Login = ({ user, setUser }: UserStateInterface) => {
+const Login = ({ setUser }: UserStateInterface) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
