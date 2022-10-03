@@ -12,7 +12,7 @@ const BlogDetail = ({ user }: UserStateInterface) => {
     <div>
       <BlogInfo blogId={blogId} />
       <CommentList blogId={blogId} />
-      {user ? <CommentForm user={user} /> : null}
+      {user ? <CommentForm user={user} blogId={blogId} /> : null}
     </div>
   );
 };
