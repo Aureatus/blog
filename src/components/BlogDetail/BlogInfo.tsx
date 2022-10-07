@@ -25,8 +25,6 @@ const BlogInfo = ({ blogId }: { blogId: string }) => {
   if (isLoading) return null;
   if (isError && error instanceof Error) return <p>{error.message}</p>;
 
-  if (typeof data === "string") return <p>{data}</p>;
-
   const blogObject = data.reduce((blog: DataInterface) => blog);
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
