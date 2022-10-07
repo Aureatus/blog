@@ -23,8 +23,6 @@ const CommentList = ({ blogId }: { blogId: string }) => {
   if (isLoading) return null;
   if (isError && error instanceof Error) return <p>{error.message}</p>;
 
-  if (typeof data === "string") return <p>{data}</p>;
-
   return (
     <>
       {data.map((comment: CommentInterface) => {
