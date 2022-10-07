@@ -7,7 +7,7 @@ const blogListGet = async (req: Request, res: Response, next: NextFunction) => {
     const postList = await Post.find(
       {},
       `title timestamp author published _id`
-    );
+    ).populate({ path: "author", model: "User" });
     return res.status(200).send(postList);
   } catch (err) {
     return next(err);
