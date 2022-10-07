@@ -8,7 +8,10 @@ const commentListGet = async (
   next: NextFunction
 ) => {
   try {
-    const comments = await Comment.find({ post: req.params.id });
+    const comments = await Comment.find({ post: req.params.id }).populate({
+      path: "author",
+      model: "User",
+    });
     return res.status(200).send(comments);
   } catch (err) {
     return next(err);
