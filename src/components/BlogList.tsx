@@ -5,7 +5,13 @@ import getBlogList from "../lib/fetch/getBlogList";
 interface BlogInterface {
   title: string;
   timestamp: Date;
-  author: string;
+  author: {
+    user_name: string;
+    given_name: string;
+    family_name: string;
+    password: string;
+    admin: boolean;
+  };
   published: boolean;
   _id: string;
 }
@@ -30,7 +36,7 @@ const BlogList = () => {
           <Link key={_id} to={_id}>
             <h1>{title}</h1>
             <p>{new Date(timestamp).toDateString()}</p>
-            <p>{author}</p>
+            <p>{`${author.given_name} ${author.family_name}`}</p>
           </Link>
         );
       })}
