@@ -20,7 +20,10 @@ const blogDetailGet = async (
   next: NextFunction
 ) => {
   try {
-    const postList = await Post.find({ _id: req.params.id });
+    const postList = await Post.find({ _id: req.params.id }).populate({
+      path: "author",
+      model: "User",
+    });
     return res.status(200).send(postList);
   } catch (err) {
     return next(err);
