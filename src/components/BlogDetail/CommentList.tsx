@@ -4,7 +4,13 @@ import getComments from "../../lib/fetch/getComments";
 interface CommentInterface {
   text: string;
   timestamp: Date;
-  author: string;
+  author: {
+    user_name: string;
+    given_name: string;
+    family_name: string;
+    password: string;
+    admin: boolean;
+  };
   _id: string;
 }
 
@@ -27,7 +33,7 @@ const CommentList = ({ blogId }: { blogId: string }) => {
 
         return (
           <div key={_id}>
-            <h2>{author}</h2>
+            <h2>{`${author.given_name} ${author.family_name}`}</h2>
             <p>{text}</p>
             <p>{new Date(timestamp).toDateString()}</p>
           </div>
