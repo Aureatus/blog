@@ -13,6 +13,7 @@ const Login = ({ setUser }: UserStateInterface) => {
     e.preventDefault();
     try {
       const loginResponse = await postLogin(userName, password);
+      if (loginResponse instanceof Error) throw loginResponse;
       const bearerToken = await loginResponse.token;
       if (setUser) setUser(bearerToken);
       navigate("/blogs");
