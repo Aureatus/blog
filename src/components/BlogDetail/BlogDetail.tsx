@@ -11,8 +11,8 @@ const BlogDetail = ({ user }: UserStateInterface) => {
   return (
     <div>
       <BlogInfo blogId={blogId} />
-      <CommentList blogId={blogId} />
       {user ? <CommentForm user={user} blogId={blogId} /> : null}
+      <CommentList blogId={blogId} />
     </div>
   );
 };
