@@ -10,6 +10,7 @@ import Login from "./components/auth/Login";
 import BlogDetail from "./components/BlogDetail/BlogDetail";
 import BlogHeader from "./components/BlogHeader";
 import BlogList from "./components/BlogList";
+import SignUp from "./components/auth/SignUp";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -53,6 +54,10 @@ const App = () => {
     {
       path: "/login",
       element: <Login user={user} setUser={setUser} />,
+    },
+    {
+      path: "/signup",
+      element: <SignUp />,
     },
   ]);
 
