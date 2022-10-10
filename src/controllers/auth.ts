@@ -42,7 +42,6 @@ const signupPost = [
   body("given_name").notEmpty().trim().escape(),
   body("family_name").notEmpty().trim().escape(),
   body("password").notEmpty().trim().escape(),
-  body("admin").isBoolean(),
   body("confirm_password").custom((value, { req }) => {
     if (value !== req.body.password) {
       throw new Error("Password confirmation does not match password");
@@ -61,7 +60,7 @@ const signupPost = [
         given_name: req.body.given_name,
         family_name: req.body.family_name,
         password: req.body.password,
-        admin: req.body.admin,
+        admin: false,
       });
 
       await User.create(user);
