@@ -1,5 +1,6 @@
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import SignUpErrorInterface from "../../interfaces/SignUpErrorInterface";
 import postSignUp from "../../lib/fetch/auth/postSignUp";
 
 const SignUp = () => {
@@ -8,6 +9,8 @@ const SignUp = () => {
   const [familyName, setFamilyName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [errors, setErrors] = useState<SignUpErrorInterface[] | null>(null);
 
   const navigate = useNavigate();
 
@@ -26,7 +29,10 @@ const SignUp = () => {
 
       navigate("/login");
     } catch (err) {
-      console.log(await err);
+      if (err instanceof Error) {
+        const errorObject = JSON.parse(err.message).errors;
+        setErrors(errorObject);
+      }
     }
   };
 
@@ -85,6 +91,13 @@ const SignUp = () => {
         </label>
         <input type="submit" value="Signup" />
       </form>
+      {errors &&
+        errors.map((error) => (
+          <div key={error.param}>
+            <h3>{error.param}</h3>
+            <p>{error.msg}</p>
+          </div>
+        ))}
     </div>
   );
 };
