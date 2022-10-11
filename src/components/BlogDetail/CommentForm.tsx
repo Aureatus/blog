@@ -1,11 +1,19 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import postComment from "../../lib/fetch/postComment";
 
 const CommentForm = ({ user, blogId }: { user: string; blogId: string }) => {
   const [commentText, setCommentText] = useState("");
 
+  const queryClient = useQueryClient();
+
   const createComment = async () => {
-    postComment(blogId, commentText, user);
+    try {
+      await postComment(blogId, commentText, user);
+      queryClient.invalidateQueries(["comments", blogId]);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
