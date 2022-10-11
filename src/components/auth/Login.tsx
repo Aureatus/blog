@@ -6,6 +6,7 @@ const Login = () => {
   const setUser = useLoaderData();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<Error | null>(null);
 
   const navigate = useNavigate();
 
@@ -16,9 +17,10 @@ const Login = () => {
       if (loginResponse instanceof Error) throw loginResponse;
       const bearerToken = await loginResponse.token;
       if (typeof setUser === "function") setUser(bearerToken);
+      setError(null);
       navigate("/blogs");
     } catch (err) {
-      console.log(err);
+      if (err instanceof Error) setError(err);
     }
   };
 
@@ -45,6 +47,7 @@ const Login = () => {
         </label>
         <input type="submit" value="Login" />
       </form>
+      {error && <p>{error.message}</p>}
     </div>
   );
 };
