@@ -25,31 +25,54 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={(e) => login(e)}>
-        <label htmlFor="userName">
-          Username
-          <input
-            type="text"
-            id="userName"
-            value={userName}
-            required
-            onChange={(e) => setUserName(e.target.value)}
-          />
-        </label>
-        <label htmlFor="password">
-          Password
-          <input
-            type="password"
-            id="password"
-            value={password}
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <input type="submit" value="Login" />
-      </form>
-      {error && <p>{error.message}</p>}
+    <div className="container is-max-desktop">
+      <section className="hero">
+        <div className="hero-body">
+          <h1 className="title is-1 has-text-centered	">Login</h1>
+          <form onSubmit={(e) => login(e)}>
+            <div className="field">
+              <label htmlFor="userName" className="label">
+                Username
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    id="userName"
+                    value={userName}
+                    placeholder="example@gmail.com"
+                    required
+                    onChange={(e) => setUserName(e.target.value)}
+                  />
+                </div>
+              </label>
+            </div>
+            <div className="field">
+              <label htmlFor="password" className="label">
+                Password
+                <div className="control">
+                  <input
+                    className="input"
+                    type="password"
+                    id="password"
+                    value={password}
+                    placeholder="*********"
+                    required
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+              </label>
+            </div>
+            <div className="field">
+              <input
+                className="button is-link is-fullwidth"
+                type="submit"
+                value="Login"
+              />
+            </div>
+          </form>
+          {error && <p>{error.message}</p>}
+        </div>
+      </section>
     </div>
   );
 };
