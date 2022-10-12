@@ -6,7 +6,8 @@ const Login = () => {
   const setUser = useLoaderData();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<Error | null>(null);
+  const [userNameError, setUserNameError] = useState<Error | null>(null);
+  const [passwordError, setPasswordError] = useState<Error | null>(null);
 
   const navigate = useNavigate();
 
@@ -17,10 +18,20 @@ const Login = () => {
       if (loginResponse instanceof Error) throw loginResponse;
       const bearerToken = await loginResponse.token;
       if (typeof setUser === "function") setUser(bearerToken);
-      setError(null);
+      setUserNameError(null);
+      setPasswordError(null);
       navigate("/blogs");
     } catch (err) {
-      if (err instanceof Error) setError(err);
+      if (err instanceof Error) {
+        if (err.message === "User not found") {
+          setUserNameError(err);
+          setPasswordError(null);
+        }
+        if (err.message === "Wrong Password") {
+          setPasswordError(err);
+          setUserNameError(null);
+        }
+      }
     }
   };
 
@@ -35,7 +46,9 @@ const Login = () => {
                 Username
                 <div className="control">
                   <input
-                    className="input"
+                    className={`input${
+                      userNameError?.message ? " is-danger" : ""
+                    }`}
                     type="text"
                     id="userName"
                     value={userName}
@@ -45,13 +58,18 @@ const Login = () => {
                   />
                 </div>
               </label>
+              {userNameError?.message ? (
+                <p className="help is-danger">{userNameError.message}</p>
+              ) : null}
             </div>
             <div className="field">
               <label htmlFor="password" className="label">
                 Password
                 <div className="control">
                   <input
-                    className="input"
+                    className={`input${
+                      passwordError?.message ? " is-danger" : ""
+                    }`}
                     type="password"
                     id="password"
                     value={password}
@@ -61,6 +79,9 @@ const Login = () => {
                   />
                 </div>
               </label>
+              {passwordError?.message ? (
+                <p className="help is-danger">{passwordError.message}</p>
+              ) : null}
             </div>
             <div className="field">
               <input
@@ -70,7 +91,6 @@ const Login = () => {
               />
             </div>
           </form>
-          {error && <p>{error.message}</p>}
         </div>
       </section>
     </div>
