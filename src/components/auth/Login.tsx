@@ -49,7 +49,7 @@ const Login = () => {
                     className={`input${
                       userNameError?.message ? " is-danger" : ""
                     }`}
-                    type="text"
+                    type="email"
                     id="userName"
                     value={userName}
                     placeholder="example@gmail.com"
