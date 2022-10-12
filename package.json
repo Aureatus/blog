@@ -9,10 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@mui/icons-material": "^5.10.6",
-    "@mui/material": "^5.10.6",
     "@tanstack/react-query": "^4.6.1",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "react": "^18.2.0",
