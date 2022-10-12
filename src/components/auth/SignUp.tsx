@@ -37,67 +37,104 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={(e) => signUp(e)}>
-        <label htmlFor="givenName">
-          First name
-          <input
-            type="text"
-            id="givenName"
-            value={givenName}
-            onChange={(e) => setGivenName(e.target.value)}
-            required
-          />
-        </label>
-        <label htmlFor="familyName">
-          Last name
-          <input
-            type="text"
-            id="familyName"
-            value={familyName}
-            onChange={(e) => setFamilyName(e.target.value)}
-            required
-          />
-        </label>
-        <label htmlFor="userName">
-          Username
-          <input
-            type="email"
-            id="userName"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            required
-          />
-        </label>
-        <label htmlFor="password">
-          Password
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <label htmlFor="confirmPassword">
-          Confirm Password
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </label>
-        <input type="submit" value="Signup" />
-      </form>
-      {errors &&
-        errors.map((error) => (
-          <div key={error.param}>
-            <h3>{error.param}</h3>
-            <p>{error.msg}</p>
-          </div>
-        ))}
+    <div className="container is-max-desktop">
+      <section className="hero">
+        <div className="hero-body">
+          <h1 className="title is-1 has-text-centered	">Sign up</h1>
+          <form onSubmit={(e) => signUp(e)}>
+            <div className="field is-grouped">
+              <div className="control is-expanded">
+                <label htmlFor="givenName" className="label">
+                  First name
+                  <input
+                    className="input"
+                    type="text"
+                    id="givenName"
+                    value={givenName}
+                    placeholder="Joe"
+                    onChange={(e) => setGivenName(e.target.value)}
+                    required
+                  />
+                </label>
+              </div>
+              <div className="control is-expanded">
+                <label htmlFor="familyName" className="label">
+                  Last name
+                  <input
+                    className="input"
+                    type="text"
+                    id="familyName"
+                    value={familyName}
+                    placeholder="Bloggs"
+                    onChange={(e) => setFamilyName(e.target.value)}
+                    required
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="field">
+              <label htmlFor="userName" className="label">
+                Username
+                <div className="control">
+                  <input
+                    className="input"
+                    type="email"
+                    id="userName"
+                    value={userName}
+                    placeholder="example@gmail.com"
+                    onChange={(e) => setUserName(e.target.value)}
+                    required
+                  />
+                </div>
+              </label>
+            </div>
+            <div className="field">
+              <label htmlFor="password" className="label">
+                Password
+                <div className="control">
+                  <input
+                    className="input"
+                    type="password"
+                    id="password"
+                    value={password}
+                    placeholder="*********"
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+              </label>
+              <label htmlFor="confirmPassword" className="label">
+                Confirm Password
+                <div className="control">
+                  <input
+                    className="input"
+                    type="password"
+                    id="confirmPassword"
+                    value={confirmPassword}
+                    placeholder="*********"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                  />
+                </div>
+              </label>
+            </div>
+            <div className="field">
+              <input
+                className="button is-link is-fullwidth"
+                type="submit"
+                value="Signup"
+              />
+            </div>
+          </form>
+          {errors &&
+            errors.map((error) => (
+              <div key={error.param}>
+                <h3>{error.param}</h3>
+                <p>{error.msg}</p>
+              </div>
+            ))}
+        </div>
+      </section>
     </div>
   );
 };
