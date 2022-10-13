@@ -39,30 +39,30 @@ const SignUp = () => {
       navigate("/login");
     } catch (err) {
       if (err instanceof Error) {
-        const errorObject = JSON.parse(err.message).errors;
+        const errorArray = JSON.parse(err.message).errors;
 
         setGivenNameError(
-          errorObject.find(
+          errorArray.find(
             (error: { param: string }) => error.param === "given_name"
           ) || null
         );
         setFamilyNameError(
-          errorObject.find(
+          errorArray.find(
             (error: { param: string }) => error.param === "family_name"
           ) || null
         );
         setUserNameError(
-          errorObject.find(
+          errorArray.find(
             (error: { param: string }) => error.param === "user_name"
           ) || null
         );
         setPasswordError(
-          errorObject.find(
+          errorArray.find(
             (error: { param: string }) => error.param === "password"
           ) || null
         );
         setConfirmPasswordError(
-          errorObject.find(
+          errorArray.find(
             (error: { param: string }) => error.param === "confirm_password"
           ) || null
         );
