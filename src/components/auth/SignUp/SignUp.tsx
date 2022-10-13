@@ -1,8 +1,8 @@
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import signUp from "../../../helpers/auth/signUp";
 import SignUpErrorInterface from "../../../interfaces/SignUpErrorInterface";
-import postSignUp from "../../../lib/fetch/auth/postSignUp";
-import findErrorObject from "../../../lib/general/findErrorObject";
+
 import ConfirmPasswordInput from "./ConfirmPasswordInput";
 import FamilyNameInput from "./FamilyNameInput";
 import GivenNameInput from "./GivenNameInput";
@@ -29,41 +29,29 @@ const SignUp = () => {
 
   const navigate = useNavigate();
 
-  const signUp = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const signUpResponse = await postSignUp(
-        userName,
-        givenName,
-        familyName,
-        password,
-        confirmPassword
-      );
-
-      if (signUpResponse instanceof Error) throw signUpResponse;
-
-      navigate("/login");
-    } catch (err) {
-      if (err instanceof Error) {
-        const errorArray = JSON.parse(err.message).errors;
-
-        setGivenNameError(findErrorObject(errorArray, "given_name"));
-        setFamilyNameError(findErrorObject(errorArray, "family_name"));
-        setUserNameError(findErrorObject(errorArray, "user_name"));
-        setPasswordError(findErrorObject(errorArray, "password"));
-        setConfirmPasswordError(
-          findErrorObject(errorArray, "confirm_password")
-        );
-      }
-    }
-  };
-
   return (
     <div className="container is-max-desktop">
       <section className="hero">
         <div className="hero-body">
           <h1 className="title is-1 has-text-centered	">Sign up</h1>
-          <form onSubmit={(e) => signUp(e)}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              signUp(
+                userName,
+                givenName,
+                familyName,
+                password,
+                confirmPassword,
+                setGivenNameError,
+                setFamilyNameError,
+                setUserNameError,
+                setPasswordError,
+                setConfirmPasswordError,
+                navigate
+              );
+            }}
+          >
             <div className="field is-grouped">
               <div className="control is-expanded">
                 <GivenNameInput
