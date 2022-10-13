@@ -11,7 +11,7 @@ import Login from "./components/auth/Login";
 import BlogDetail from "./components/BlogDetail/BlogDetail";
 import BlogHeader from "./components/BlogHeader";
 import BlogList from "./components/BlogList";
-import SignUp from "./components/auth/SignUp";
+import SignUp from "./components/auth/SignUp/SignUp";
 
 const App = () => {
   const queryClient = new QueryClient();
