@@ -2,6 +2,7 @@ import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import SignUpErrorInterface from "../../interfaces/SignUpErrorInterface";
 import postSignUp from "../../lib/fetch/auth/postSignUp";
+import findErrorObject from "../../lib/general/findErrorObject";
 
 const SignUp = () => {
   const [userName, setUserName] = useState("");
@@ -41,30 +42,12 @@ const SignUp = () => {
       if (err instanceof Error) {
         const errorArray = JSON.parse(err.message).errors;
 
-        setGivenNameError(
-          errorArray.find(
-            (error: { param: string }) => error.param === "given_name"
-          ) || null
-        );
-        setFamilyNameError(
-          errorArray.find(
-            (error: { param: string }) => error.param === "family_name"
-          ) || null
-        );
-        setUserNameError(
-          errorArray.find(
-            (error: { param: string }) => error.param === "user_name"
-          ) || null
-        );
-        setPasswordError(
-          errorArray.find(
-            (error: { param: string }) => error.param === "password"
-          ) || null
-        );
+        setGivenNameError(findErrorObject(errorArray, "given_name"));
+        setFamilyNameError(findErrorObject(errorArray, "family_name"));
+        setUserNameError(findErrorObject(errorArray, "user_name"));
+        setPasswordError(findErrorObject(errorArray, "password"));
         setConfirmPasswordError(
-          errorArray.find(
-            (error: { param: string }) => error.param === "confirm_password"
-          ) || null
+          findErrorObject(errorArray, "confirm_password")
         );
       }
     }
