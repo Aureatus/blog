@@ -10,7 +10,16 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [errors, setErrors] = useState<SignUpErrorInterface[] | null>(null);
+  const [givenNameError, setGivenNameError] =
+    useState<SignUpErrorInterface | null>(null);
+  const [familyNameError, setFamilyNameError] =
+    useState<SignUpErrorInterface | null>(null);
+  const [userNameError, setUserNameError] =
+    useState<SignUpErrorInterface | null>(null);
+  const [passwordError, setPasswordError] =
+    useState<SignUpErrorInterface | null>(null);
+  const [confirmPasswordError, setConfirmPasswordError] =
+    useState<SignUpErrorInterface | null>(null);
 
   const navigate = useNavigate();
 
@@ -31,7 +40,32 @@ const SignUp = () => {
     } catch (err) {
       if (err instanceof Error) {
         const errorObject = JSON.parse(err.message).errors;
-        setErrors(errorObject);
+
+        setGivenNameError(
+          errorObject.find(
+            (error: { param: string }) => error.param === "given_name"
+          ) || null
+        );
+        setFamilyNameError(
+          errorObject.find(
+            (error: { param: string }) => error.param === "family_name"
+          ) || null
+        );
+        setUserNameError(
+          errorObject.find(
+            (error: { param: string }) => error.param === "user_name"
+          ) || null
+        );
+        setPasswordError(
+          errorObject.find(
+            (error: { param: string }) => error.param === "password"
+          ) || null
+        );
+        setConfirmPasswordError(
+          errorObject.find(
+            (error: { param: string }) => error.param === "confirm_password"
+          ) || null
+        );
       }
     }
   };
@@ -47,7 +81,7 @@ const SignUp = () => {
                 <label htmlFor="givenName" className="label">
                   First name
                   <input
-                    className="input"
+                    className={`input${givenNameError ? " is-danger" : ""}`}
                     type="text"
                     id="givenName"
                     value={givenName}
@@ -56,12 +90,15 @@ const SignUp = () => {
                     required
                   />
                 </label>
+                {givenNameError?.msg ? (
+                  <p className="help is-danger">{givenNameError.msg}</p>
+                ) : null}
               </div>
               <div className="control is-expanded">
                 <label htmlFor="familyName" className="label">
                   Last name
                   <input
-                    className="input"
+                    className={`input${familyNameError ? " is-danger" : ""}`}
                     type="text"
                     id="familyName"
                     value={familyName}
@@ -70,6 +107,9 @@ const SignUp = () => {
                     required
                   />
                 </label>
+                {familyNameError?.msg ? (
+                  <p className="help is-danger">{familyNameError.msg}</p>
+                ) : null}
               </div>
             </div>
             <div className="field">
@@ -77,7 +117,7 @@ const SignUp = () => {
                 Username
                 <div className="control">
                   <input
-                    className="input"
+                    className={`input${userNameError ? " is-danger" : ""}`}
                     type="email"
                     id="userName"
                     value={userName}
@@ -87,13 +127,16 @@ const SignUp = () => {
                   />
                 </div>
               </label>
+              {userNameError?.msg ? (
+                <p className="help is-danger">{userNameError.msg}</p>
+              ) : null}
             </div>
             <div className="field">
               <label htmlFor="password" className="label">
                 Password
                 <div className="control">
                   <input
-                    className="input"
+                    className={`input${passwordError ? " is-danger" : ""}`}
                     type="password"
                     id="password"
                     value={password}
@@ -103,11 +146,16 @@ const SignUp = () => {
                   />
                 </div>
               </label>
+              {passwordError?.msg ? (
+                <p className="help is-danger">{passwordError.msg}</p>
+              ) : null}
               <label htmlFor="confirmPassword" className="label">
                 Confirm Password
                 <div className="control">
                   <input
-                    className="input"
+                    className={`input${
+                      confirmPasswordError ? " is-danger" : ""
+                    }`}
                     type="password"
                     id="confirmPassword"
                     value={confirmPassword}
@@ -117,6 +165,9 @@ const SignUp = () => {
                   />
                 </div>
               </label>
+              {confirmPasswordError?.msg ? (
+                <p className="help is-danger">{confirmPasswordError.msg}</p>
+              ) : null}
             </div>
             <div className="field">
               <input
@@ -126,13 +177,6 @@ const SignUp = () => {
               />
             </div>
           </form>
-          {errors &&
-            errors.map((error) => (
-              <div key={error.param}>
-                <h3>{error.param}</h3>
-                <p>{error.msg}</p>
-              </div>
-            ))}
         </div>
       </section>
     </div>
