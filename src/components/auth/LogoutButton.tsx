@@ -2,7 +2,7 @@ import UserStateInterface from "../../interfaces/UserStateInterface";
 
 const Logout = ({ setUser }: UserStateInterface) => (
   <button
-    className="button is-danger is-outlined"
+    className="button is-danger"
     type="button"
     onClick={() => {
       if (setUser) setUser(null);
