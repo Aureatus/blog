@@ -33,7 +33,7 @@ const CommentForm = ({ user, blogId }: { user: string; blogId: string }) => {
               className={`input${commentError?.message ? " is-danger" : ""}`}
               type="text"
               id="commentText"
-              placeholder="Type comment"
+              placeholder="Leave a comment!"
               value={commentText}
               onChange={(e) => {
                 setCommentText(e.target.value);
