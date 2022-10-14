@@ -8,10 +8,14 @@ const BlogHeader = ({ user, setUser }: UserStateInterface) => (
     {user ? (
       <Logout setUser={setUser} />
     ) : (
-      <>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Signup</Link>
-      </>
+      <div className="buttons">
+        <Link to="/login" className="button is-link">
+          Login
+        </Link>
+        <Link to="/signup" className="button is-link">
+          Signup
+        </Link>
+      </div>
     )}
   </header>
 );
