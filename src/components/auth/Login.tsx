@@ -1,9 +1,9 @@
-import { useState, FormEvent } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import postLogin from "../../lib/fetch/auth/postLogin";
+import login from "../../helpers/auth/login";
 
 const Login = () => {
-  const setUser = useLoaderData();
+  const setUser = useLoaderData() as Dispatch<SetStateAction<string | null>>;
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [userNameError, setUserNameError] = useState<Error | null>(null);
@@ -11,36 +11,25 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const login = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const loginResponse = await postLogin(userName, password);
-      if (loginResponse instanceof Error) throw loginResponse;
-      const bearerToken = await loginResponse.token;
-      if (typeof setUser === "function") setUser(bearerToken);
-      setUserNameError(null);
-      setPasswordError(null);
-      navigate("/blogs");
-    } catch (err) {
-      if (err instanceof Error) {
-        if (err.message === "User not found") {
-          setUserNameError(err);
-          setPasswordError(null);
-        }
-        if (err.message === "Wrong Password") {
-          setPasswordError(err);
-          setUserNameError(null);
-        }
-      }
-    }
-  };
-
   return (
     <div className="container is-max-desktop">
       <section className="hero">
         <div className="hero-body">
           <h1 className="title is-1 has-text-centered	">Login</h1>
-          <form onSubmit={(e) => login(e)}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (setUser)
+                login(
+                  userName,
+                  password,
+                  setUser,
+                  setUserNameError,
+                  setPasswordError,
+                  navigate
+                );
+            }}
+          >
             <div className="field">
               <label htmlFor="userName" className="label">
                 Username
