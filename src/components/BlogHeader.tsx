@@ -4,7 +4,7 @@ import Logout from "./auth/LogoutButton";
 
 const BlogHeader = ({ user, setUser }: UserStateInterface) => (
   <header>
-    <h1>Blog project</h1>
+    <h1 className="title is-1">Blog project</h1>
     {user ? (
       <Logout setUser={setUser} />
     ) : (
