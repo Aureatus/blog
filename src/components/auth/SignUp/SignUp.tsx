@@ -2,12 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import signUp from "../../../helpers/auth/signUp";
 import SignUpErrorInterface from "../../../interfaces/SignUpErrorInterface";
-
-import ConfirmPasswordInput from "./ConfirmPasswordInput";
-import FamilyNameInput from "./FamilyNameInput";
-import GivenNameInput from "./GivenNameInput";
-import PasswordInput from "./PasswordInput";
-import UserNameInput from "./UserNameInput";
+import ConfirmPasswordField from "./ConfirmPasswordField";
+import LegalNameField from "./LegalNameField";
+import PasswordField from "./PasswordField";
+import UserNameInput from "./UserNameField";
 
 const SignUp = () => {
   const [userName, setUserName] = useState("");
@@ -52,58 +50,29 @@ const SignUp = () => {
               );
             }}
           >
-            <div className="field is-grouped">
-              <div className="control is-expanded">
-                <GivenNameInput
-                  givenName={givenName}
-                  setGivenName={setGivenName}
-                  givenNameError={givenNameError}
-                />
-              </div>
-              {givenNameError?.msg ? (
-                <p className="help is-danger">{givenNameError.msg}</p>
-              ) : null}
-              <div className="control is-expanded">
-                <FamilyNameInput
-                  familyName={familyName}
-                  setFamilyName={setFamilyName}
-                  familyNameError={familyNameError}
-                />
-              </div>
-              {familyNameError?.msg ? (
-                <p className="help is-danger">{familyNameError.msg}</p>
-              ) : null}
-            </div>
-            <div className="field">
-              <UserNameInput
-                userName={userName}
-                setUserName={setUserName}
-                userNameError={userNameError}
-              />{" "}
-              {userNameError?.msg ? (
-                <p className="help is-danger">{userNameError.msg}</p>
-              ) : null}
-            </div>
-            <div className="field">
-              <PasswordInput
-                password={password}
-                setPassword={setPassword}
-                passwordError={passwordError}
-              />
-              {passwordError?.msg ? (
-                <p className="help is-danger">{passwordError.msg}</p>
-              ) : null}
-            </div>
-            <div className="field">
-              <ConfirmPasswordInput
-                confirmPassword={confirmPassword}
-                setConfirmPassword={setConfirmPassword}
-                confirmPasswordError={confirmPasswordError}
-              />
-              {confirmPasswordError?.msg ? (
-                <p className="help is-danger">{confirmPasswordError.msg}</p>
-              ) : null}
-            </div>
+            <LegalNameField
+              givenName={givenName}
+              setGivenName={setGivenName}
+              givenNameError={givenNameError}
+              familyName={familyName}
+              setFamilyName={setFamilyName}
+              familyNameError={familyNameError}
+            />
+            <UserNameInput
+              userName={userName}
+              setUserName={setUserName}
+              userNameError={userNameError}
+            />
+            <PasswordField
+              password={password}
+              setPassword={setPassword}
+              passwordError={passwordError}
+            />
+            <ConfirmPasswordField
+              confirmPassword={confirmPassword}
+              setConfirmPassword={setConfirmPassword}
+              confirmPasswordError={confirmPasswordError}
+            />
             <div className="field">
               <input
                 className="button is-link is-fullwidth"
