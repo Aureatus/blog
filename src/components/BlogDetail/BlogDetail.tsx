@@ -9,7 +9,7 @@ const BlogDetail = ({ user }: UserStateInterface) => {
   if (typeof blogId !== "string") return <p>Invalid id type</p>;
 
   return (
-    <div>
+    <div className="container">
       <BlogInfo blogId={blogId} />
       {user ? <CommentForm user={user} blogId={blogId} /> : null}
       <CommentList blogId={blogId} />
