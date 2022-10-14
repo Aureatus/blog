@@ -4,15 +4,18 @@ import postComment from "../../lib/fetch/postComment";
 
 const CommentForm = ({ user, blogId }: { user: string; blogId: string }) => {
   const [commentText, setCommentText] = useState("");
+  const [commentError, setCommentError] = useState<Error | null>(null);
 
   const queryClient = useQueryClient();
 
   const createComment = async () => {
     try {
-      await postComment(blogId, commentText, user);
+      const commentResponse = await postComment(blogId, commentText, user);
+      if (commentResponse instanceof Error) throw commentResponse;
       queryClient.invalidateQueries(["comments", blogId]);
+      setCommentError(null);
     } catch (err) {
-      console.log(err);
+      if (err instanceof Error) setCommentError(err);
     }
   };
 
@@ -34,6 +37,7 @@ const CommentForm = ({ user, blogId }: { user: string; blogId: string }) => {
           }}
         />
       </label>
+      {commentError?.message ? <p>{commentError.message}</p> : null}
     </form>
   );
 };
