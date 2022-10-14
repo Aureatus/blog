@@ -33,11 +33,17 @@ const BlogInfo = ({ blogId }: { blogId: string }) => {
   if (!published) return null;
 
   return (
-    <div key={_id}>
-      <h1>{title}</h1>
-      <p>{content}</p>
-      <p>{new Date(timestamp).toDateString()}</p>
-      <p>{`${author.given_name} ${author.family_name}`}</p>
+    <div key={_id} className="section box">
+      <div className="level">
+        <div>
+          <h1 className="title is-2">{title}</h1>
+          <h3 className="subtitle is-4">{`By ${author.given_name} ${author.family_name}`}</h3>
+        </div>
+        <h4 className="is-size-5 is-italic">
+          Published {new Date(timestamp).toDateString()}
+        </h4>
+      </div>
+      <p className="is-size-5 has-text-justified">{content}</p>
     </div>
   );
 };
