@@ -3,7 +3,7 @@ import UserStateInterface from "../interfaces/UserStateInterface";
 import Logout from "./auth/LogoutButton";
 
 const BlogHeader = ({ user, setUser }: UserStateInterface) => (
-  <header className="level">
+  <header className="level has-background-primary p-5">
     <section className="level-left">
       <div className="level-item">
         <h1 className="title is-1">Blog project</h1>
