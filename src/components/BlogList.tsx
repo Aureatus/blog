@@ -25,7 +25,7 @@ const BlogList = () => {
   if (typeof data === "string") return <p>{data}</p>;
 
   return (
-    <>
+    <div className="columns is-multiline is-centered is-vcentered p-4">
       {data.map((blog: BlogInterface) => {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         const { title, timestamp, author, published, _id } = blog;
@@ -33,14 +33,28 @@ const BlogList = () => {
         if (!published) return null;
 
         return (
-          <Link key={_id} to={_id}>
-            <h1>{title}</h1>
-            <p>{new Date(timestamp).toDateString()}</p>
-            <p>{`${author.given_name} ${author.family_name}`}</p>
+          <Link key={_id} to={_id} className="column is-one-third">
+            <div className="card">
+              <header className="card-header has-background-primary	">
+                <p className="card-header-title title is-3">{title}</p>
+              </header>
+              <div className="card-content">
+                <div className="content">
+                  <p className="subtitle is-5">
+                    Written by{" "}
+                    <strong>{`${author.given_name} ${author.family_name}`}</strong>
+                  </p>
+                </div>
+                <p className="subtitle is-5">
+                  Published on:{" "}
+                  <strong>{new Date(timestamp).toDateString()}</strong>
+                </p>
+              </div>
+            </div>
           </Link>
         );
       })}
-    </>
+    </div>
   );
 };
 
