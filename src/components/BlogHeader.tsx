@@ -3,20 +3,28 @@ import UserStateInterface from "../interfaces/UserStateInterface";
 import Logout from "./auth/LogoutButton";
 
 const BlogHeader = ({ user, setUser }: UserStateInterface) => (
-  <header>
-    <h1 className="title is-1">Blog project</h1>
-    {user ? (
-      <Logout setUser={setUser} />
-    ) : (
-      <div className="buttons">
-        <Link to="/login" className="button is-link">
-          Login
-        </Link>
-        <Link to="/signup" className="button is-link">
-          Signup
-        </Link>
+  <header className="level">
+    <section className="level-left">
+      <div className="level-item">
+        <h1 className="title is-1">Blog project</h1>
       </div>
-    )}
+    </section>
+    <section className="level-right">
+      <div className="level-item">
+        {user ? (
+          <Logout setUser={setUser} />
+        ) : (
+          <div className="buttons">
+            <Link to="/login" className="button is-link">
+              Login
+            </Link>
+            <Link to="/signup" className="button is-link">
+              Signup
+            </Link>
+          </div>
+        )}
+      </div>
+    </section>
   </header>
 );
 
