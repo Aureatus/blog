@@ -7,7 +7,7 @@ import {
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { useEffect, useState } from "react";
-import Login from "./components/auth/Login";
+import Login from "./components/auth/Login/Login";
 import BlogDetail from "./components/BlogDetail/BlogDetail";
 import BlogHeader from "./components/BlogHeader";
 import BlogList from "./components/BlogList";
