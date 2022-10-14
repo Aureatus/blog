@@ -26,18 +26,25 @@ const CommentForm = ({ user, blogId }: { user: string; blogId: string }) => {
         createComment();
       }}
     >
-      <label htmlFor="commentText">
-        <input
-          type="text"
-          id="commentText"
-          placeholder="Type comment"
-          value={commentText}
-          onChange={(e) => {
-            setCommentText(e.target.value);
-          }}
-        />
-      </label>
-      {commentError?.message ? <p>{commentError.message}</p> : null}
+      <div className="field">
+        <label htmlFor="commentText" className="label">
+          <div className="control">
+            <input
+              className={`input${commentError?.message ? " is-danger" : ""}`}
+              type="text"
+              id="commentText"
+              placeholder="Type comment"
+              value={commentText}
+              onChange={(e) => {
+                setCommentText(e.target.value);
+              }}
+            />
+          </div>
+        </label>
+        {commentError?.message ? (
+          <p className="help is-danger">{commentError.message}</p>
+        ) : null}
+      </div>
     </form>
   );
 };
