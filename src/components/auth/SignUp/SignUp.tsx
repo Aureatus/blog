@@ -93,6 +93,8 @@ const SignUp = () => {
               {passwordError?.msg ? (
                 <p className="help is-danger">{passwordError.msg}</p>
               ) : null}
+            </div>
+            <div className="field">
               <ConfirmPasswordInput
                 confirmPassword={confirmPassword}
                 setConfirmPassword={setConfirmPassword}
