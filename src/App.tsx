@@ -15,6 +15,7 @@ import SignUp from "./components/auth/SignUp/SignUp";
 import getBlogList from "./lib/fetch/getBlogList";
 import getBlog from "./lib/fetch/getBlog";
 import getComments from "./lib/fetch/getComments";
+import ErrorElement from "./components/ErrorElement";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const App = () => {
         });
         return data;
       },
+      errorElement: <ErrorElement />,
     },
     {
       path: "/blogs/:blogId",
@@ -78,6 +80,7 @@ const App = () => {
         );
         return blogId;
       },
+      errorElement: <ErrorElement />,
     },
     {
       path: "/login",
