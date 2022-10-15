@@ -16,9 +16,9 @@ import getBlogList from "./lib/fetch/getBlogList";
 import getBlog from "./lib/fetch/getBlog";
 import getComments from "./lib/fetch/getComments";
 
-const App = () => {
-  const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
+const App = () => {
   const [user, setUser] = useState<string | null>(
     localStorage.getItem("bearerToken")
   );
