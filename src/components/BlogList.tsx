@@ -1,20 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import BlogDataInterface from "../interfaces/BlogDataInterface";
 import getBlogList from "../lib/fetch/getBlogList";
-
-interface BlogInterface {
-  title: string;
-  timestamp: Date;
-  author: {
-    user_name: string;
-    given_name: string;
-    family_name: string;
-    password: string;
-    admin: boolean;
-  };
-  published: boolean;
-  _id: string;
-}
 
 const BlogList = () => {
   const { data, isLoading, isError, error } = useQuery(["blogs"], getBlogList);
@@ -27,7 +14,7 @@ const BlogList = () => {
   return (
     <div className="box p-4 m-5">
       <div className="columns is-multiline is-centered is-vcentered p-4">
-        {data.map((blog: BlogInterface) => {
+        {data.map((blog: BlogDataInterface) => {
           // eslint-disable-next-line @typescript-eslint/naming-convention
           const { title, timestamp, author, published, _id } = blog;
 
