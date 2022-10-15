@@ -4,12 +4,14 @@ import BlogDataInterface from "../interfaces/BlogDataInterface";
 import getBlogList from "../lib/fetch/getBlogList";
 
 const BlogList = () => {
-  const { data, isLoading, isError, error } = useQuery(["blogs"], getBlogList);
+  const { data, isLoading, isError, error } = useQuery<BlogDataInterface[]>(
+    ["blogs"],
+    () => getBlogList()
+  );
 
+  if (!data) return null;
   if (isLoading) return null;
   if (isError && error instanceof Error) return <p>{error.message}</p>;
-
-  if (typeof data === "string") return <p>{data}</p>;
 
   return (
     <div className="box p-4 m-5">

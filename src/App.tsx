@@ -12,6 +12,9 @@ import BlogDetail from "./components/BlogDetail/BlogDetail";
 import BlogHeader from "./components/BlogHeader";
 import BlogList from "./components/BlogList";
 import SignUp from "./components/auth/SignUp/SignUp";
+import getBlogList from "./lib/fetch/getBlogList";
+import getBlog from "./lib/fetch/getBlog";
+import getComments from "./lib/fetch/getComments";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -41,6 +44,16 @@ const App = () => {
           <BlogList />
         </>
       ),
+      loader: async () => {
+        try {
+          const data = await queryClient.prefetchQuery(["blogs"], getBlogList, {
+            staleTime: 10000,
+          });
+          return data;
+        } catch (err) {
+          return err;
+        }
+      },
     },
     {
       path: "/blogs/:blogId",
@@ -50,7 +63,29 @@ const App = () => {
           <BlogDetail user={user} />
         </>
       ),
-      loader: ({ params }) => params.blogId,
+      loader: async ({ params }) => {
+        const { blogId } = params;
+        if (typeof blogId !== "string") return null;
+        try {
+          await queryClient.prefetchQuery(
+            ["blogs", blogId],
+            () => getBlog(blogId),
+            {
+              staleTime: 10000,
+            }
+          );
+          await queryClient.prefetchQuery(
+            ["comments", blogId],
+            () => getComments(blogId),
+            {
+              staleTime: 10000,
+            }
+          );
+          return blogId;
+        } catch (err) {
+          return err;
+        }
+      },
     },
     {
       path: "/login",
