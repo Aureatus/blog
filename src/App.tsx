@@ -43,9 +43,7 @@ const App = () => {
         </>
       ),
       loader: async () => {
-        const data = await queryClient.fetchQuery(["blogs"], getBlogList, {
-          staleTime: 10000,
-        });
+        const data = await queryClient.fetchQuery(["blogs"], getBlogList);
         return data;
       },
       errorElement: <ErrorElement />,
