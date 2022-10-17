@@ -46,9 +46,7 @@ const App = () => {
         </>
       ),
       loader: async () => {
-        const data = await queryClient.fetchQuery(["blogs"], getBlogList, {
-          staleTime: 10000,
-        });
+        const data = await queryClient.fetchQuery(["blogs"], getBlogList);
         return data;
       },
       errorElement: <ErrorElement />,
@@ -64,19 +62,11 @@ const App = () => {
       loader: async ({ params }) => {
         const { blogId } = params;
         if (typeof blogId !== "string") return null;
-        await queryClient.prefetchQuery(
-          ["blogs", blogId],
-          () => getBlog(blogId),
-          {
-            staleTime: 10000,
-          }
+        await queryClient.prefetchQuery(["blogs", blogId], () =>
+          getBlog(blogId)
         );
-        await queryClient.prefetchQuery(
-          ["comments", blogId],
-          () => getComments(blogId),
-          {
-            staleTime: 10000,
-          }
+        await queryClient.prefetchQuery(["comments", blogId], () =>
+          getComments(blogId)
         );
         return blogId;
       },
