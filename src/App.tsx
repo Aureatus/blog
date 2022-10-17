@@ -13,6 +13,7 @@ import BlogList from "./components/BlogList";
 import SignUp from "./components/auth/SignUp/SignUp";
 import getBlogList from "./lib/fetch/getBlogList";
 import ErrorElement from "./components/ErrorElement";
+import getUserInfo from "./lib/fetch/getUserInfo";
 
 const queryClient = new QueryClient();
 
@@ -39,12 +40,13 @@ const App = () => {
       element: (
         <>
           <BlogHeader user={user} setUser={setUser} />
-          <BlogList />
+          <BlogList user={user} />
         </>
       ),
       loader: async () => {
-        const data = await queryClient.fetchQuery(["blogs"], getBlogList);
-        return data;
+        await queryClient.fetchQuery(["blogs"], getBlogList);
+        if (user)
+          await queryClient.fetchQuery(["userId"], () => getUserInfo(user));
       },
       errorElement: <ErrorElement />,
     },

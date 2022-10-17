@@ -1,17 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import BlogDataInterface from "../interfaces/BlogDataInterface";
+import UserStateInterface from "../interfaces/UserStateInterface";
 import getBlogList from "../lib/fetch/getBlogList";
+import getUserInfo from "../lib/fetch/getUserInfo";
 
-const BlogList = () => {
+const BlogList = ({ user }: UserStateInterface) => {
+  if (!user) return null;
   const { data, isLoading, isError, error } = useQuery<BlogDataInterface[]>(
     ["blogs"],
     () => getBlogList()
   );
 
+  const { data: userData, isLoading: userDataLoading } = useQuery(
+    ["userId"],
+    () => getUserInfo(user)
+  );
   if (!data) return null;
-  if (isLoading) return null;
+  if (isLoading || userDataLoading) return null;
   if (isError && error instanceof Error) return <p>{error.message}</p>;
+  const { _id: userId } = userData;
 
   return (
     <div className="box p-4 m-5">
@@ -19,6 +27,8 @@ const BlogList = () => {
         {data.map((blog: BlogDataInterface) => {
           // eslint-disable-next-line @typescript-eslint/naming-convention
           const { title, timestamp, author, published, _id } = blog;
+          // eslint-disable-next-line no-underscore-dangle
+          if (author._id !== userId) return null;
 
           if (!published) return null;
 
