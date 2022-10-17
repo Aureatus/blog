@@ -10,6 +10,7 @@ import loginStrategy from "./strategies/login";
 import authRouter from "./routes/auth";
 import blogRouter from "./routes/blog";
 import commentRouter from "./routes/comment";
+import userRouter from "./routes/user";
 import JWTStrategy from "./strategies/JWT";
 
 dotenv.config();
@@ -42,6 +43,7 @@ app.get("/", (req, res) => {
 app.use("/", authRouter);
 app.use("/blogs", blogRouter);
 app.use("/comments", commentRouter);
+app.use("/user", userRouter);
 
 app.use((req, res, next) => {
   next(res.status(404));
