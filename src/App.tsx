@@ -62,10 +62,8 @@ const App = () => {
       loader: async ({ params }) => {
         const { blogId } = params;
         if (typeof blogId !== "string") return null;
-        await queryClient.prefetchQuery(["blogs", blogId], () =>
-          getBlog(blogId)
-        );
-        await queryClient.prefetchQuery(["comments", blogId], () =>
+        await queryClient.fetchQuery(["blogs", blogId], () => getBlog(blogId));
+        await queryClient.fetchQuery(["comments", blogId], () =>
           getComments(blogId)
         );
         return blogId;
