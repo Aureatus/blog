@@ -8,6 +8,7 @@ interface DataInterface {
     family_name: string;
     password: string;
     admin: boolean;
+    _id: string;
   };
   published: boolean;
   _id: string;
