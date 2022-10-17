@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import BlogDataInterface from "../interfaces/BlogDataInterface";
 import getBlogList from "../lib/fetch/getBlogList";
 
@@ -39,6 +40,14 @@ const BlogList = () => {
                     </p>
                   </div>
                 </div>
+                <footer className="card-footer">
+                  <Link to={`${_id}/edit`} className="card-footer-item">
+                    Edit
+                  </Link>
+                  <Link to={`${_id}/delete`} className="card-footer-item ">
+                    Delete
+                  </Link>
+                </footer>
               </div>
             </div>
           );
