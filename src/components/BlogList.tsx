@@ -33,11 +33,11 @@ const BlogList = () => {
                       Written by{" "}
                       <strong>{`${author.given_name} ${author.family_name}`}</strong>
                     </p>
+                    <p className="subtitle is-5">
+                      Published on:{" "}
+                      <strong>{new Date(timestamp).toDateString()}</strong>
+                    </p>
                   </div>
-                  <p className="subtitle is-5">
-                    Published on:{" "}
-                    <strong>{new Date(timestamp).toDateString()}</strong>
-                  </p>
                 </div>
               </div>
             </div>
