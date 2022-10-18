@@ -14,6 +14,9 @@ import SignUp from "./components/auth/SignUp/SignUp";
 import getBlogList from "./lib/fetch/getBlogList";
 import ErrorElement from "./components/ErrorElement";
 import getUserInfo from "./lib/fetch/getUserInfo";
+import BlogEdit from "./components/BlogEdit/BlogEdit";
+import blogEditLoader from "./lib/loaders/BlogEditLoader";
+import BlogDataInterface from "./interfaces/BlogDataInterface";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +51,27 @@ const App = () => {
         await queryClient.fetchQuery(["blogs"], getBlogList);
         await queryClient.fetchQuery(["userId"], () => getUserInfo(user));
         return null;
+      },
+      errorElement: <ErrorElement />,
+    },
+    {
+      path: "/blogs/:blogId/edit",
+      element: (
+        <>
+          <BlogHeader user={user} setUser={setUser} />
+          <BlogEdit user={user} />
+        </>
+      ),
+      loader: async ({ params }) => {
+        const { blogId } = params;
+        if (typeof blogId !== "string") throw Error("Provided id is not valid");
+        const blogDetail: BlogDataInterface = await blogEditLoader(
+          blogId,
+          user,
+          queryClient
+        );
+        if (blogDetail instanceof Error) throw blogDetail;
+        return blogDetail;
       },
       errorElement: <ErrorElement />,
     },
