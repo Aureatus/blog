@@ -33,7 +33,7 @@ const blogDetailGet = async (
 const blogUpdate = [
   body("title").isString().notEmpty().trim().escape(),
   body("content").isString().notEmpty().trim().escape(),
-  body("published").isBoolean(),
+  body("published").toBoolean().isBoolean(),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { _id, admin }: any = req.user;
@@ -46,7 +46,7 @@ const blogUpdate = [
         post.author &&
         JSON.stringify(post.author).replace(/"/g, "") === _id
       ) {
-        post.updateOne({
+        await post.updateOne({
           title: req.body.title,
           content: req.body.content,
           published: req.body.published,
