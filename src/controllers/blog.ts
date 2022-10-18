@@ -36,6 +36,10 @@ const blogUpdate = [
   body("published").toBoolean().isBoolean(),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(401).send(errors);
+      }
       const { _id, admin }: any = req.user;
 
       const post = await Post.findById(req.params.id);
