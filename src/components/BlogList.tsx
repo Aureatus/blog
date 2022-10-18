@@ -26,11 +26,9 @@ const BlogList = ({ user }: UserStateInterface) => {
       <div className="columns is-multiline is-centered is-vcentered p-4">
         {data.map((blog: BlogDataInterface) => {
           // eslint-disable-next-line @typescript-eslint/naming-convention
-          const { title, timestamp, author, published, _id } = blog;
+          const { title, timestamp, author, _id } = blog;
           // eslint-disable-next-line no-underscore-dangle
           if (author._id !== userId) return null;
-
-          if (!published) return null;
 
           return (
             <div key={_id} className="column is-one-third">
