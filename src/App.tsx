@@ -17,6 +17,7 @@ import getUserInfo from "./lib/fetch/getUserInfo";
 import BlogEdit from "./components/BlogEdit/BlogEdit";
 import blogEditLoader from "./lib/loaders/BlogEditLoader";
 import BlogDataInterface from "./interfaces/BlogDataInterface";
+import BlogDelete from "./components/BlogDelete";
 
 const queryClient = new QueryClient();
 
@@ -72,6 +73,21 @@ const App = () => {
         );
         if (blogDetail instanceof Error) throw blogDetail;
         return blogDetail;
+      },
+      errorElement: <ErrorElement />,
+    },
+    {
+      path: "/blogs/:blogId/delete",
+      element: (
+        <>
+          <BlogHeader user={user} setUser={setUser} />
+          <BlogDelete user={user} />
+        </>
+      ),
+      loader: async ({ params }) => {
+        const { blogId } = params;
+        if (typeof blogId !== "string") throw Error("Provided id is not valid");
+        return blogId;
       },
       errorElement: <ErrorElement />,
     },
