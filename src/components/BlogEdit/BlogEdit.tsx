@@ -27,7 +27,7 @@ const BlogEdit = ({ user }: UserStateInterface) => {
   const [success, setSuccess] = useState(false);
 
   return success ? (
-    <SuccessElement />
+    <SuccessElement message="Blog updated!" />
   ) : (
     <div className="container is-max-desktop">
       <section className="hero">
