@@ -41,7 +41,7 @@ const blogUpdate = [
       if (!errors.isEmpty()) {
         return res.status(401).send(errors);
       }
-      const { _id, admin }: any = req.user;
+      const { _id: userId, admin }: any = req.user;
 
       const post = await Post.findById(req.params.id);
 
@@ -49,7 +49,7 @@ const blogUpdate = [
 
       if (
         post.author &&
-        JSON.stringify(post.author).replace(/"/g, "") === _id
+        JSON.stringify(post.author).replace(/"/g, "") === userId
       ) {
         await post.updateOne({
           title: req.body.title,
@@ -86,14 +86,14 @@ const blogCreate = [
         return res.status(401).send(errors);
       }
 
-      const { _id }: any = req.user;
+      const { _id: userId }: any = req.user;
 
       const post = new Post({
         title: req.body.title,
         content: req.body.content,
         timestamp: Date(),
         // eslint-disable-next-line no-underscore-dangle
-        author: _id,
+        author: userId,
         published: req.body.published,
       });
 
@@ -107,14 +107,17 @@ const blogCreate = [
 
 const blogDelete = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { _id, admin }: any = req.user;
+    const { _id: userId, admin }: any = req.user;
     if (!isValidObjectId(req.params.id))
       return res.status(404).send("Invalid post id");
 
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).send("Post doesn't exist");
 
-    if (post.author && JSON.stringify(post.author).replace(/"/g, "") === _id) {
+    if (
+      post.author &&
+      JSON.stringify(post.author).replace(/"/g, "") === userId
+    ) {
       post.delete();
       return res.sendStatus(200);
     }
