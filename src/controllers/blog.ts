@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { body, validationResult } from "express-validator";
+import { isValidObjectId } from "mongoose";
 import Post from "../models/post";
 
 const blogListGet = async (req: Request, res: Response, next: NextFunction) => {
@@ -107,6 +108,8 @@ const blogCreate = [
 const blogDelete = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { _id, admin }: any = req.user;
+    if (!isValidObjectId(req.params.id))
+      return res.status(404).send("Invalid post id");
 
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).send("Post doesn't exist");
