@@ -19,7 +19,6 @@ const PublishedField = ({
           id="published"
           checked={published}
           onChange={(e) => setPublished(e.target.checked)}
-          required
         />
         Published
       </label>
