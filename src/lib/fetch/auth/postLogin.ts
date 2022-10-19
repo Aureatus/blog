@@ -10,7 +10,7 @@ const postLogin = async (username: string, password: string) => {
   };
   try {
     const response = await fetch(`http://localhost:3000/login`, options);
-    if (response.status !== 200) throw new Error(`${await response.text()}`);
+    if (!response.ok) throw new Error(`${await response.text()}`);
     return await response.json();
   } catch (err) {
     if (err instanceof Error) return err;
