@@ -18,6 +18,7 @@ import PostEdit from "./components/PostEdit/PostEdit";
 import postEditLoader from "./lib/loaders/PostEditLoader";
 import PostDataInterface from "./interfaces/PostDataInterface";
 import PostDelete from "./components/PostDelete";
+import PostCreate from "./components/PostCreate/PostCreate";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,16 @@ const App = () => {
         await queryClient.fetchQuery(["userData"], () => getUserInfo(user));
         return null;
       },
+      errorElement: <ErrorElement />,
+    },
+    {
+      path: "/posts/create",
+      element: (
+        <>
+          <PostHeader user={user} setUser={setUser} />
+          <PostCreate user={user} />
+        </>
+      ),
       errorElement: <ErrorElement />,
     },
     {
