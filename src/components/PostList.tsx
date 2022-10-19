@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import BlogDataInterface from "../interfaces/BlogDataInterface";
+import PostDataInterface from "../interfaces/PostDataInterface";
 import UserStateInterface from "../interfaces/UserStateInterface";
-import getBlogList from "../lib/fetch/getBlogList";
+import getPostList from "../lib/fetch/getPostList";
 import getUserInfo from "../lib/fetch/getUserInfo";
 
-const BlogList = ({ user }: UserStateInterface) => {
+const PostList = ({ user }: UserStateInterface) => {
   if (!user) return null;
-  const { data, isLoading, isError, error } = useQuery<BlogDataInterface[]>(
-    ["blogs"],
-    () => getBlogList()
+  const { data, isLoading, isError, error } = useQuery<PostDataInterface[]>(
+    ["posts"],
+    () => getPostList()
   );
 
   const { data: userData, isLoading: userDataLoading } = useQuery(
@@ -32,9 +32,9 @@ const BlogList = ({ user }: UserStateInterface) => {
       </div>
       <div className="box p-4 m-5">
         <div className="columns is-multiline is-centered is-vcentered p-4">
-          {data.map((blog: BlogDataInterface) => {
+          {data.map((post: PostDataInterface) => {
             // eslint-disable-next-line @typescript-eslint/naming-convention
-            const { title, timestamp, author, _id } = blog;
+            const { title, timestamp, author, _id } = post;
             // eslint-disable-next-line no-underscore-dangle
             if (author._id !== userId) return null;
             return (
@@ -73,4 +73,4 @@ const BlogList = ({ user }: UserStateInterface) => {
   );
 };
 
-export default BlogList;
+export default PostList;

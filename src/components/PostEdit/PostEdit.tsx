@@ -1,48 +1,48 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import editBlog from "../../helpers/blog/editBlog";
-import BlogDataInterface from "../../interfaces/BlogDataInterface";
-import BlogResponseErrorInterface from "../../interfaces/BlogResponseErrorInterface";
+import editPost from "../../helpers/posts/editPost";
+import PostDataInterface from "../../interfaces/PostDataInterface";
+import PostResponseErrorInterface from "../../interfaces/PostResponseErrorInterface";
 import UserStateInterface from "../../interfaces/UserStateInterface";
 import SuccessElement from "../SuccessElement";
 import ContentField from "./ContentField";
 import PublishedField from "./PublishedField";
 import TitleField from "./TitleField";
 
-const BlogEdit = ({ user }: UserStateInterface) => {
+const PostEdit = ({ user }: UserStateInterface) => {
   if (!user) return null;
-  const blogDetail = useLoaderData() as BlogDataInterface;
+  const postDetail = useLoaderData() as PostDataInterface;
 
-  const [title, setTitle] = useState(blogDetail.title);
-  const [content, setContent] = useState(blogDetail.content);
-  const [published, setPublished] = useState(blogDetail.published);
+  const [title, setTitle] = useState(postDetail.title);
+  const [content, setContent] = useState(postDetail.content);
+  const [published, setPublished] = useState(postDetail.published);
 
   const [titleError, setTitleError] =
-    useState<BlogResponseErrorInterface | null>(null);
+    useState<PostResponseErrorInterface | null>(null);
   const [contentError, setContentError] =
-    useState<BlogResponseErrorInterface | null>(null);
+    useState<PostResponseErrorInterface | null>(null);
   const [publishedError, setPublishedError] =
-    useState<BlogResponseErrorInterface | null>(null);
+    useState<PostResponseErrorInterface | null>(null);
 
   const [success, setSuccess] = useState(false);
 
   return success ? (
-    <SuccessElement message="Blog updated!" />
+    <SuccessElement message="Post updated!" />
   ) : (
     <div className="container is-max-desktop">
       <section className="hero">
         <div className="hero-body">
-          <h1 className="title is-1 has-text-centered	">Edit Blog</h1>
+          <h1 className="title is-1 has-text-centered	">Edit Post</h1>
           <form
             id="editForm"
             onSubmit={(e) => {
               e.preventDefault();
-              editBlog(
+              editPost(
                 title,
                 content,
                 published,
                 // eslint-disable-next-line no-underscore-dangle
-                blogDetail._id,
+                postDetail._id,
                 user,
                 setSuccess,
                 setTitleError,
@@ -80,4 +80,4 @@ const BlogEdit = ({ user }: UserStateInterface) => {
   );
 };
 
-export default BlogEdit;
+export default PostEdit;

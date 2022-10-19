@@ -8,16 +8,16 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { useEffect, useState } from "react";
 import Login from "./components/auth/Login/Login";
-import BlogHeader from "./components/BlogHeader";
-import BlogList from "./components/BlogList";
+import PostHeader from "./components/PostHeader";
+import PostList from "./components/PostList";
 import SignUp from "./components/auth/SignUp/SignUp";
-import getBlogList from "./lib/fetch/getBlogList";
+import getPostList from "./lib/fetch/getPostList";
 import ErrorElement from "./components/ErrorElement";
 import getUserInfo from "./lib/fetch/getUserInfo";
-import BlogEdit from "./components/BlogEdit/BlogEdit";
-import blogEditLoader from "./lib/loaders/BlogEditLoader";
-import BlogDataInterface from "./interfaces/BlogDataInterface";
-import BlogDelete from "./components/BlogDelete";
+import PostEdit from "./components/PostEdit/PostEdit";
+import postEditLoader from "./lib/loaders/PostEditLoader";
+import PostDataInterface from "./interfaces/PostDataInterface";
+import PostDelete from "./components/PostDelete";
 
 const queryClient = new QueryClient();
 
@@ -37,57 +37,57 @@ const App = () => {
   const router = createBrowserRouter([
     {
       index: true,
-      element: <Navigate to="/blogs" replace />,
+      element: <Navigate to="/posts" replace />,
     },
     {
-      path: "/blogs",
+      path: "/posts",
       element: (
         <>
-          <BlogHeader user={user} setUser={setUser} />
-          <BlogList user={user} />
+          <PostHeader user={user} setUser={setUser} />
+          <PostList user={user} />
         </>
       ),
       loader: async () => {
         if (!user) throw Error("Please login or sign up");
-        await queryClient.fetchQuery(["blogs"], getBlogList);
+        await queryClient.fetchQuery(["posts"], getPostList);
         await queryClient.fetchQuery(["userData"], () => getUserInfo(user));
         return null;
       },
       errorElement: <ErrorElement />,
     },
     {
-      path: "/blogs/:blogId/edit",
+      path: "/posts/:postId/edit",
       element: (
         <>
-          <BlogHeader user={user} setUser={setUser} />
-          <BlogEdit user={user} />
+          <PostHeader user={user} setUser={setUser} />
+          <PostEdit user={user} />
         </>
       ),
       loader: async ({ params }) => {
-        const { blogId } = params;
-        if (typeof blogId !== "string") throw Error("Provided id is not valid");
-        const blogDetail: BlogDataInterface = await blogEditLoader(
-          blogId,
+        const { postId } = params;
+        if (typeof postId !== "string") throw Error("Provided id is not valid");
+        const postDetail: PostDataInterface = await postEditLoader(
+          postId,
           user,
           queryClient
         );
-        if (blogDetail instanceof Error) throw blogDetail;
-        return blogDetail;
+        if (postDetail instanceof Error) throw postDetail;
+        return postDetail;
       },
       errorElement: <ErrorElement />,
     },
     {
-      path: "/blogs/:blogId/delete",
+      path: "/posts/:postId/delete",
       element: (
         <>
-          <BlogHeader user={user} setUser={setUser} />
-          <BlogDelete user={user} />
+          <PostHeader user={user} setUser={setUser} />
+          <PostDelete user={user} />
         </>
       ),
       loader: async ({ params }) => {
-        const { blogId } = params;
-        if (typeof blogId !== "string") throw Error("Provided id is not valid");
-        return blogId;
+        const { postId } = params;
+        if (typeof postId !== "string") throw Error("Provided id is not valid");
+        return postId;
       },
       errorElement: <ErrorElement />,
     },

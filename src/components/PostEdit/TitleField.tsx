@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import BlogResponseErrorInterface from "../../interfaces/BlogResponseErrorInterface";
+import PostResponseErrorInterface from "../../interfaces/PostResponseErrorInterface";
 
 const TitleField = ({
   title,
@@ -8,7 +8,7 @@ const TitleField = ({
 }: {
   title: string;
   setTitle: Dispatch<SetStateAction<string>>;
-  titleError: BlogResponseErrorInterface | null;
+  titleError: PostResponseErrorInterface | null;
 }) => (
   <div className="field">
     <label htmlFor="title" className="label">

@@ -8,8 +8,8 @@ const SuccessElement = ({ message }: { message: string }) => (
           {message}
         </h1>
         <div className="buttons is-centered">
-          <Link to="/blogs" className="button is-link">
-            Back to blogs
+          <Link to="/posts" className="button is-link">
+            Back to posts
           </Link>
         </div>
       </div>

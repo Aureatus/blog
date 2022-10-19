@@ -1,26 +1,26 @@
 import { Dispatch, SetStateAction } from "react";
-import BlogResponseErrorInterface from "../../interfaces/BlogResponseErrorInterface";
-import putBlog from "../../lib/fetch/putBlog";
+import PostResponseErrorInterface from "../../interfaces/PostResponseErrorInterface";
+import putPost from "../../lib/fetch/putPost";
 import findErrorObject from "../../lib/general/findErrorObject";
 
-const editBlog = async (
+const editPost = async (
   title: string,
   content: string,
   published: boolean,
-  blogId: string,
+  postId: string,
   bearerToken: string,
   setSuccess: Dispatch<SetStateAction<boolean>>,
-  setTitleError: Dispatch<SetStateAction<BlogResponseErrorInterface | null>>,
-  setContentError: Dispatch<SetStateAction<BlogResponseErrorInterface | null>>,
-  setPublishedError: Dispatch<SetStateAction<BlogResponseErrorInterface | null>>
+  setTitleError: Dispatch<SetStateAction<PostResponseErrorInterface | null>>,
+  setContentError: Dispatch<SetStateAction<PostResponseErrorInterface | null>>,
+  setPublishedError: Dispatch<SetStateAction<PostResponseErrorInterface | null>>
 ) => {
   try {
     setSuccess(false);
-    const editResponse = await putBlog(
+    const editResponse = await putPost(
       title,
       content,
       published,
-      blogId,
+      postId,
       bearerToken
     );
     if (editResponse instanceof Error) throw editResponse;
@@ -36,4 +36,4 @@ const editBlog = async (
   }
 };
 
-export default editBlog;
+export default editPost;

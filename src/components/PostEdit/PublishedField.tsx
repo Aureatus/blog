@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import BlogResponseErrorInterface from "../../interfaces/BlogResponseErrorInterface";
+import PostResponseErrorInterface from "../../interfaces/PostResponseErrorInterface";
 
 const PublishedField = ({
   published,
@@ -8,7 +8,7 @@ const PublishedField = ({
 }: {
   published: boolean;
   setPublished: Dispatch<SetStateAction<boolean>>;
-  publishedError: BlogResponseErrorInterface | null;
+  publishedError: PostResponseErrorInterface | null;
 }) => (
   <div className="field">
     <div className="control">

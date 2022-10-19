@@ -1,23 +1,14 @@
-const putBlog = async (
-  title: string,
-  content: string,
-  published: boolean,
-  blogId: string,
-  bearerToken: string
-) => {
-  const blogDetails = { title, content, published: published.toString() };
-
+const delPost = async (postId: string, bearerToken: string) => {
   const options = {
-    method: "PUT",
+    method: "DELETE",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       Authorization: bearerToken,
     },
-    body: new URLSearchParams(blogDetails),
   };
   try {
     const response = await fetch(
-      `http://localhost:3000/blogs/${blogId}/update`,
+      `http://localhost:3000/posts/${postId}/delete`,
       options
     );
     if (!response.ok) throw new Error(`${await response.text()}`);
@@ -28,4 +19,4 @@ const putBlog = async (
   }
 };
 
-export default putBlog;
+export default delPost;

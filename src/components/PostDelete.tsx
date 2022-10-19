@@ -1,32 +1,32 @@
 import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import deleteBlog from "../helpers/blog/deleteBlog";
+import deletePost from "../helpers/posts/deletePost";
 import UserStateInterface from "../interfaces/UserStateInterface";
 import SuccessElement from "./SuccessElement";
 
-const BlogDelete = ({ user }: UserStateInterface) => {
+const PostDelete = ({ user }: UserStateInterface) => {
   if (!user) return null;
-  const blogId = useLoaderData();
-  if (typeof blogId !== "string") return null;
+  const postId = useLoaderData();
+  if (typeof postId !== "string") return null;
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const navigate = useNavigate();
 
   return success ? (
-    <SuccessElement message="Blog deleted!" />
+    <SuccessElement message="Post deleted!" />
   ) : (
     <div className="level">
       <div className="level-item">
         <section className="hero">
           <div className="hero-body">
             <h2 className="title is-1 has-text-centered  mb-5">
-              Are you sure you want to delete this blog?
+              Are you sure you want to delete this post?
             </h2>
             <div className="buttons is-centered">
               <button
                 type="button"
                 className="button is-medium is-danger mr-3"
-                onClick={() => deleteBlog(blogId, user, setSuccess, setError)}
+                onClick={() => deletePost(postId, user, setSuccess, setError)}
               >
                 Delete
               </button>
@@ -48,4 +48,4 @@ const BlogDelete = ({ user }: UserStateInterface) => {
   );
 };
 
-export default BlogDelete;
+export default PostDelete;

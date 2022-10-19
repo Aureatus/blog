@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import BlogResponseErrorInterface from "../../interfaces/BlogResponseErrorInterface";
+import PostResponseErrorInterface from "../../interfaces/PostResponseErrorInterface";
 
 const ContentField = ({
   content,
@@ -8,7 +8,7 @@ const ContentField = ({
 }: {
   content: string;
   setContent: Dispatch<SetStateAction<string>>;
-  contentError: BlogResponseErrorInterface | null;
+  contentError: PostResponseErrorInterface | null;
 }) => (
   <div className="field">
     <label htmlFor="content" className="label">

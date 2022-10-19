@@ -1,15 +1,15 @@
 import { Dispatch, SetStateAction } from "react";
-import delBlog from "../../lib/fetch/delBlog";
+import delPost from "../../lib/fetch/delPost";
 
-const deleteBlog = async (
-  blogId: string,
+const deletePost = async (
+  postId: string,
   bearerToken: string,
   setSuccess: Dispatch<SetStateAction<boolean>>,
   setError: Dispatch<SetStateAction<Error | null>>
 ) => {
   try {
     setSuccess(false);
-    const editResponse = await delBlog(blogId, bearerToken);
+    const editResponse = await delPost(postId, bearerToken);
     if (editResponse instanceof Error) throw editResponse;
     setSuccess(true);
     setError(null);
@@ -20,4 +20,4 @@ const deleteBlog = async (
   }
 };
 
-export default deleteBlog;
+export default deletePost;

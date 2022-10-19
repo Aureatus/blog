@@ -1,4 +1,4 @@
-interface DataInterface {
+interface PostDataInterface {
   title: string;
   content: string;
   timestamp: Date;
@@ -14,4 +14,4 @@ interface DataInterface {
   _id: string;
 }
 
-export default DataInterface;
+export default PostDataInterface;

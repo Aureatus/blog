@@ -17,7 +17,7 @@ const login = async (
     if (typeof setUser === "function") setUser(bearerToken);
     setUserNameError(null);
     setPasswordError(null);
-    navigate("/blogs");
+    navigate("/posts");
   } catch (err) {
     if (err instanceof Error) {
       if (err.message === "User not found") {

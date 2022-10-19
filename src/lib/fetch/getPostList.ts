@@ -1,6 +1,6 @@
-const getBlogList = async () => {
+const getPostList = async () => {
   try {
-    const response = await fetch("http://localhost:3000/blogs");
+    const response = await fetch("http://localhost:3000/posts");
     if (response.status !== 200)
       throw new Error(`${response.status} ${response.statusText}`);
     return await response.json();
@@ -10,4 +10,4 @@ const getBlogList = async () => {
   }
 };
 
-export default getBlogList;
+export default getPostList;

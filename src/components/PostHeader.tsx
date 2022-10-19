@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import UserStateInterface from "../interfaces/UserStateInterface";
 import Logout from "./auth/LogoutButton";
 
-const BlogHeader = ({ user, setUser }: UserStateInterface) => (
+const PostHeader = ({ user, setUser }: UserStateInterface) => (
   <header className="level p-5">
     <section className="level-left">
       <div className="level-item">
-        <h1 className="title is-1">Blog writing</h1>
+        <h1 className="title is-1">Post writing</h1>
       </div>
     </section>
     <section className="level-right">
@@ -28,4 +28,4 @@ const BlogHeader = ({ user, setUser }: UserStateInterface) => (
   </header>
 );
 
-export default BlogHeader;
+export default PostHeader;
