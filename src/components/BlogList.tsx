@@ -13,7 +13,7 @@ const BlogList = ({ user }: UserStateInterface) => {
   );
 
   const { data: userData, isLoading: userDataLoading } = useQuery(
-    ["userId"],
+    ["userData"],
     () => getUserInfo(user)
   );
   if (!data) return null;

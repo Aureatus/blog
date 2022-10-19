@@ -49,7 +49,7 @@ const App = () => {
       loader: async () => {
         if (!user) throw Error("Please login or sign up");
         await queryClient.fetchQuery(["blogs"], getBlogList);
-        await queryClient.fetchQuery(["userId"], () => getUserInfo(user));
+        await queryClient.fetchQuery(["userData"], () => getUserInfo(user));
         return null;
       },
       errorElement: <ErrorElement />,
