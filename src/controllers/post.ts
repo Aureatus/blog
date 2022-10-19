@@ -3,7 +3,7 @@ import { body, validationResult } from "express-validator";
 import { isValidObjectId } from "mongoose";
 import Post from "../models/post";
 
-const blogListGet = async (req: Request, res: Response, next: NextFunction) => {
+const postListGet = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const postList = await Post.find(
       {},
@@ -15,7 +15,7 @@ const blogListGet = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const blogDetailGet = async (
+const postDetailGet = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -31,7 +31,7 @@ const blogDetailGet = async (
   }
 };
 
-const blogUpdate = [
+const postUpdate = [
   body("title").isString().notEmpty().trim().escape(),
   body("content").isString().notEmpty().trim().escape(),
   body("published").toBoolean().isBoolean(),
@@ -74,7 +74,7 @@ const blogUpdate = [
   },
 ];
 
-const blogCreate = [
+const postCreate = [
   body("title").isString().notEmpty().trim().escape(),
   body("content").isString().notEmpty().trim().escape(),
   body("published").isBoolean(),
@@ -105,7 +105,7 @@ const blogCreate = [
   },
 ];
 
-const blogDelete = async (req: Request, res: Response, next: NextFunction) => {
+const postDelete = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { _id: userId, admin }: any = req.user;
     if (!isValidObjectId(req.params.id))
@@ -131,4 +131,4 @@ const blogDelete = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { blogListGet, blogDetailGet, blogUpdate, blogCreate, blogDelete };
+export { postListGet, postDetailGet, postUpdate, postCreate, postDelete };

@@ -8,7 +8,7 @@ import cors from "cors";
 import loginStrategy from "./strategies/login";
 
 import authRouter from "./routes/auth";
-import blogRouter from "./routes/blog";
+import postRouter from "./routes/post";
 import commentRouter from "./routes/comment";
 import userRouter from "./routes/user";
 import JWTStrategy from "./strategies/JWT";
@@ -41,7 +41,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", authRouter);
-app.use("/blogs", blogRouter);
+app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
 app.use("/user", userRouter);
 
