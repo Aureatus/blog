@@ -62,8 +62,10 @@ const App = () => {
       loader: async ({ params }) => {
         const { postId } = params;
         if (typeof postId !== "string") return null;
-        await queryClient.fetchQuery(["posts", postId], () => getPost(postId));
-        await queryClient.fetchQuery(["comments", postId], () =>
+        await queryClient.prefetchQuery(["posts", postId], () =>
+          getPost(postId)
+        );
+        await queryClient.prefetchQuery(["comments", postId], () =>
           getComments(postId)
         );
         return postId;
