@@ -8,7 +8,18 @@ const PostInfo = ({ postId }: { postId: string }) => {
   );
 
   if (isLoading) return null;
-  if (isError && error instanceof Error) return <p>{error.message}</p>;
+  if (isError && error instanceof Error)
+    return (
+      <div className="hero is-danger">
+        <div className="hero-body">
+          <div className="container">
+            <h1 className="title is-size-1 has-text-centered is-capitalized ">
+              There was an error loading this post.
+            </h1>
+          </div>
+        </div>
+      </div>
+    );
 
   const postObject = data.reduce((post: PostDataInterface) => post);
 
