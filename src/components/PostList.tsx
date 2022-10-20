@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import PostDataInterface from "../interfaces/PostDataInterface";
 import getPostList from "../lib/fetch/getPostList";
+import LoadingElement from "./LoadingElement";
 
 const PostList = () => {
   const { data, isLoading, isError, error } = useQuery<PostDataInterface[]>(
@@ -9,7 +10,7 @@ const PostList = () => {
     () => getPostList()
   );
 
-  if (isLoading) return <p>loading</p>;
+  if (isLoading) return <LoadingElement />;
   if (isError && error instanceof Error) throw error;
   if (!data) return null;
 

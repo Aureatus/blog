@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import getComments from "../../lib/fetch/getComments";
+import LoadingElement from "../LoadingElement";
 
 interface CommentInterface {
   text: string;
@@ -20,7 +21,7 @@ const CommentList = ({ postId }: { postId: string }) => {
     () => getComments(postId)
   );
 
-  if (isLoading) return null;
+  if (isLoading) return <LoadingElement />;
 
   if (isError && error instanceof Error) {
     return (

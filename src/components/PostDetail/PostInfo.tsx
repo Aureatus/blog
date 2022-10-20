@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import PostDataInterface from "../../interfaces/PostDataInterface";
 import getPost from "../../lib/fetch/getPost";
+import LoadingElement from "../LoadingElement";
 
 const PostInfo = ({ postId }: { postId: string }) => {
   const { data, isLoading, isError, error } = useQuery(["posts", postId], () =>
     getPost(postId)
   );
 
-  if (isLoading) return null;
+  if (isLoading) return <LoadingElement />;
   if (isError && error instanceof Error)
     return (
       <div className="hero is-danger">
