@@ -46,8 +46,8 @@ const App = () => {
         </>
       ),
       loader: async () => {
-        const data = await queryClient.fetchQuery(["posts"], getPostList);
-        return data;
+        await queryClient.prefetchQuery(["posts"], getPostList);
+        return null;
       },
       errorElement: <ErrorElement />,
     },
