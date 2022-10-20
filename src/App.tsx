@@ -84,12 +84,12 @@ const App = () => {
               );
               return null;
             }}
-            errorElement={<ErrorElement />}
+            errorElement={<ErrorElement providedError={null} />}
           />
           <Route
             path="create"
             element={<PostCreate user={user} />}
-            errorElement={<ErrorElement />}
+            errorElement={<ErrorElement providedError={null} />}
           />
           <Route
             path=":postId/edit"
@@ -106,7 +106,7 @@ const App = () => {
               if (postDetail instanceof Error) throw postDetail;
               return postDetail;
             }}
-            errorElement={<ErrorElement />}
+            errorElement={<ErrorElement providedError={null} />}
           />
           <Route
             path=":postId/delete"
@@ -117,7 +117,7 @@ const App = () => {
                 throw Error("Provided id is not valid");
               return postId;
             }}
-            errorElement={<ErrorElement />}
+            errorElement={<ErrorElement providedError={null} />}
           />
         </Route>
       </Route>
