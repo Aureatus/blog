@@ -1,6 +1,9 @@
 import {
   createBrowserRouter,
+  createRoutesFromElements,
   Navigate,
+  Outlet,
+  Route,
   RouterProvider,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -32,48 +35,49 @@ const App = () => {
     }
   }, [user]);
 
-  const router = createBrowserRouter([
-    {
-      index: true,
-      element: <Navigate to="/posts" replace />,
-    },
-    {
-      path: "/posts",
-      element: (
-        <>
-          <BlogHeader user={user} setUser={setUser} />
-          <PostList />
-        </>
-      ),
-      loader: () => listLoader(queryClient),
-      errorElement: <ErrorElement />,
-    },
-    {
-      path: "/posts/:postId",
-      element: (
-        <>
-          <BlogHeader user={user} setUser={setUser} />
-          <PostDetail user={user} />
-        </>
-      ),
-      loader: (request) => detailLoader(request, queryClient),
-      errorElement: <ErrorElement />,
-    },
-    {
-      path: "/login",
-      element: <Login />,
-      loader: () => loginLoader({ user, setUser }),
-    },
-    {
-      path: "/signup",
-      element: <SignUp />,
-      loader: () => () => signUpLoader(user),
-    },
-  ]);
+  const router2 = createBrowserRouter(
+    createRoutesFromElements(
+      <Route element={<Outlet />}>
+        <Route index element={<Navigate to="posts" replace />} />
+        <Route
+          path="login"
+          element={<Login />}
+          loader={() => loginLoader({ user, setUser })}
+        />
+        <Route
+          path="signup"
+          element={<SignUp />}
+          loader={() => signUpLoader(user)}
+        />
+        <Route
+          path="posts"
+          element={
+            <>
+              <BlogHeader user={user} setUser={setUser} />
+              <Outlet />
+            </>
+          }
+        >
+          <Route
+            index
+            element={<PostList />}
+            loader={() => listLoader(queryClient)}
+            errorElement={<ErrorElement />}
+          />
+          <Route
+            path=":postId"
+            element={<PostDetail user={user} />}
+            loader={(request) => detailLoader(request, queryClient)}
+            errorElement={<ErrorElement />}
+          />
+        </Route>
+      </Route>
+    )
+  );
 
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <RouterProvider router={router2} />
     </QueryClientProvider>
   );
 };
