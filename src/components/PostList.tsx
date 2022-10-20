@@ -4,6 +4,7 @@ import PostDataInterface from "../interfaces/PostDataInterface";
 import UserStateInterface from "../interfaces/UserStateInterface";
 import getPostList from "../lib/fetch/getPostList";
 import getUserInfo from "../lib/fetch/getUserInfo";
+import ErrorElement from "./ErrorElement";
 
 const PostList = ({ user }: UserStateInterface) => {
   if (!user) return null;
@@ -11,14 +12,15 @@ const PostList = ({ user }: UserStateInterface) => {
     ["posts"],
     () => getPostList()
   );
-
   const { data: userData, isLoading: userDataLoading } = useQuery(
     ["userData"],
     () => getUserInfo(user)
   );
+  if (isLoading || userDataLoading) return <p>loading</p>;
+  if (isError && error instanceof Error)
+    return <ErrorElement providedError={error} />;
   if (!data) return null;
-  if (isLoading || userDataLoading) return null;
-  if (isError && error instanceof Error) return <p>{error.message}</p>;
+
   const { _id: userId } = userData;
 
   return (
