@@ -7,7 +7,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
 import { useEffect, useState } from "react";
 import Login from "./components/auth/Login/Login";
 import PostHeader from "./components/PostHeader";
