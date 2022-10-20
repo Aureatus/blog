@@ -12,11 +12,10 @@ import BlogHeader from "./components/BlogHeader";
 import PostList from "./components/PostList";
 import SignUp from "./components/auth/SignUp/SignUp";
 import getPostList from "./lib/fetch/getPostList";
-import getPost from "./lib/fetch/getPost";
-import getComments from "./lib/fetch/getComments";
 import ErrorElement from "./components/ErrorElement";
 import loginLoader from "./lib/loaders/loginLoader";
 import signUpLoader from "./lib/loaders/signUpLoader";
+import detailLoader from "./lib/loaders/detailLoader";
 
 const queryClient = new QueryClient();
 
@@ -60,17 +59,7 @@ const App = () => {
           <PostDetail user={user} />
         </>
       ),
-      loader: async ({ params }) => {
-        const { postId } = params;
-        if (typeof postId !== "string") return null;
-        await queryClient.prefetchQuery(["posts", postId], () =>
-          getPost(postId)
-        );
-        await queryClient.prefetchQuery(["comments", postId], () =>
-          getComments(postId)
-        );
-        return postId;
-      },
+      loader: async (request) => detailLoader(request, queryClient),
       errorElement: <ErrorElement />,
     },
     {
