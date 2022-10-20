@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import deletePost from "../helpers/posts/deletePost";
@@ -6,6 +7,8 @@ import SuccessElement from "./SuccessElement";
 
 const PostDelete = ({ user }: UserStateInterface) => {
   if (!user) return null;
+
+  const queryClient = useQueryClient();
   const postId = useLoaderData();
   if (typeof postId !== "string") return null;
   const [success, setSuccess] = useState(false);
@@ -26,7 +29,11 @@ const PostDelete = ({ user }: UserStateInterface) => {
               <button
                 type="button"
                 className="button is-medium is-danger mr-3"
-                onClick={() => deletePost(postId, user, setSuccess, setError)}
+                onClick={() =>
+                  deletePost(postId, user, setSuccess, setError).then(() =>
+                    queryClient.invalidateQueries(["posts"])
+                  )
+                }
               >
                 Delete
               </button>
