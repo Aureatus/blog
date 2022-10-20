@@ -17,6 +17,7 @@ import getPost from "./lib/fetch/getPost";
 import getComments from "./lib/fetch/getComments";
 import ErrorElement from "./components/ErrorElement";
 import loginLoader from "./lib/loaders/loginLoader";
+import signUpLoader from "./lib/loaders/signUpLoader";
 
 const queryClient = new QueryClient();
 
@@ -76,10 +77,7 @@ const App = () => {
     {
       path: "/login",
       element: <Login />,
-      loader: () => {
-        if (user) return redirect("/");
-        return setUser;
-      },
+      loader: () => () => signUpLoader(user),
     },
     {
       path: "/signup",
