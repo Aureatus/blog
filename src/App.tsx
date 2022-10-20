@@ -17,13 +17,12 @@ import getPostList from "./lib/fetch/getPostList";
 import ErrorElement from "./components/ErrorElement";
 import getUserInfo from "./lib/fetch/getUserInfo";
 import PostEdit from "./components/PostEdit/PostEdit";
-import postEditLoader from "./lib/loaders/PostEditLoader";
-import PostDataInterface from "./interfaces/PostDataInterface";
 import PostDelete from "./components/PostDelete";
 import PostCreate from "./components/PostCreate/PostCreate";
 import loginLoader from "./lib/loaders/loginLoader";
 import signUpLoader from "./lib/loaders/signUpLoader";
 import deleteLoader from "./lib/loaders/deleteLoader";
+import editLoader from "./lib/loaders/editLoader";
 
 const queryClient = new QueryClient();
 
@@ -90,18 +89,7 @@ const App = () => {
           <Route
             path=":postId/edit"
             element={<PostEdit user={user} />}
-            loader={async ({ params }) => {
-              const { postId } = params;
-              if (typeof postId !== "string")
-                throw Error("Provided id is not valid");
-              const postDetail: PostDataInterface = await postEditLoader(
-                postId,
-                user,
-                queryClient
-              );
-              if (postDetail instanceof Error) throw postDetail;
-              return postDetail;
-            }}
+            loader={async (request) => editLoader(request, user, queryClient)}
             errorElement={<ErrorElement providedError={null} />}
           />
           <Route
