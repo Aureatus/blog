@@ -21,7 +21,7 @@ const CommentList = ({ postId }: { postId: string }) => {
   );
 
   if (isLoading) return null;
-  if (isError && error instanceof Error) return <p>{error.message}</p>;
+  if (isError && error instanceof Error) throw error;
 
   return (
     <div className="columns is-multiline is-centered is-vcentered p-4 ">
