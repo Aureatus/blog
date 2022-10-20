@@ -65,12 +65,12 @@ const App = () => {
     {
       path: "/login",
       element: <Login />,
-      loader: () => () => signUpLoader(user),
+      loader: () => loginLoader({ user, setUser }),
     },
     {
       path: "/signup",
       element: <SignUp />,
-      loader: () => loginLoader({ user, setUser }),
+      loader: () => () => signUpLoader(user),
     },
   ]);
 
