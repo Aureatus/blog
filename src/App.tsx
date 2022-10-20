@@ -62,13 +62,13 @@ const App = () => {
             index
             element={<PostList />}
             loader={() => listLoader(queryClient)}
-            errorElement={<ErrorElement />}
+            errorElement={<ErrorElement providedError={null} />}
           />
           <Route
             path=":postId"
             element={<PostDetail user={user} />}
             loader={(request) => detailLoader(request, queryClient)}
-            errorElement={<ErrorElement />}
+            errorElement={<ErrorElement providedError={null} />}
           />
         </Route>
       </Route>
