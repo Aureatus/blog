@@ -3,7 +3,6 @@ import {
   createRoutesFromElements,
   Navigate,
   Outlet,
-  redirect,
   Route,
   RouterProvider,
 } from "react-router-dom";
@@ -22,7 +21,8 @@ import postEditLoader from "./lib/loaders/PostEditLoader";
 import PostDataInterface from "./interfaces/PostDataInterface";
 import PostDelete from "./components/PostDelete";
 import PostCreate from "./components/PostCreate/PostCreate";
-import authLoader from "./lib/loaders/authLoader";
+import loginLoader from "./lib/loaders/loginLoader";
+import signUpLoader from "./lib/loaders/signUpLoader";
 
 const queryClient = new QueryClient();
 
@@ -52,18 +52,12 @@ const App = () => {
         <Route
           path="login"
           element={<Login />}
-          loader={() => {
-            if (user) return redirect("/");
-            return setUser;
-          }}
+          loader={() => loginLoader({ user, setUser })}
         />
         <Route
           path="signup"
           element={<SignUp />}
-          loader={() => {
-            if (user) return redirect("/");
-            return null;
-          }}
+          loader={() => signUpLoader(user)}
         />
         <Route
           path="posts"
