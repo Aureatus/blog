@@ -9,8 +9,8 @@ const PostList = () => {
     () => getPostList()
   );
 
-  if (isLoading) return null;
-  if (isError && error instanceof Error) return <p>{error.message}</p>;
+  if (isLoading) return <p>loading</p>;
+  if (isError && error instanceof Error) throw error;
   if (!data) return null;
 
   return (
