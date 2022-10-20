@@ -22,6 +22,7 @@ import postEditLoader from "./lib/loaders/PostEditLoader";
 import PostDataInterface from "./interfaces/PostDataInterface";
 import PostDelete from "./components/PostDelete";
 import PostCreate from "./components/PostCreate/PostCreate";
+import authLoader from "./lib/loaders/authLoader";
 
 const queryClient = new QueryClient();
 
@@ -53,7 +54,7 @@ const App = () => {
           element={<Login />}
           loader={() => {
             if (user) return redirect("/");
-            return null;
+            return setUser;
           }}
         />
         <Route
