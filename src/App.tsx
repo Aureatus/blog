@@ -1,7 +1,10 @@
 import {
   createBrowserRouter,
+  createRoutesFromElements,
   Navigate,
+  Outlet,
   redirect,
+  Route,
   RouterProvider,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -35,90 +38,91 @@ const App = () => {
     }
   }, [user]);
 
-  const router = createBrowserRouter([
-    {
-      index: true,
-      element: <Navigate to="/posts" replace />,
-    },
-    {
-      path: "/posts",
-      element: (
-        <>
-          <PostHeader user={user} setUser={setUser} />
-          <PostList user={user} />
-        </>
-      ),
-      loader: async () => {
-        if (!user) throw Error("Please login or sign up");
-        await queryClient.fetchQuery(["posts"], getPostList);
-        await queryClient.fetchQuery(["userData"], () => getUserInfo(user));
-        return null;
-      },
-      errorElement: <ErrorElement />,
-    },
-    {
-      path: "/posts/create",
-      element: (
-        <>
-          <PostHeader user={user} setUser={setUser} />
-          <PostCreate user={user} />
-        </>
-      ),
-      errorElement: <ErrorElement />,
-    },
-    {
-      path: "/posts/:postId/edit",
-      element: (
-        <>
-          <PostHeader user={user} setUser={setUser} />
-          <PostEdit user={user} />
-        </>
-      ),
-      loader: async ({ params }) => {
-        const { postId } = params;
-        if (typeof postId !== "string") throw Error("Provided id is not valid");
-        const postDetail: PostDataInterface = await postEditLoader(
-          postId,
-          user,
-          queryClient
-        );
-        if (postDetail instanceof Error) throw postDetail;
-        return postDetail;
-      },
-      errorElement: <ErrorElement />,
-    },
-    {
-      path: "/posts/:postId/delete",
-      element: (
-        <>
-          <PostHeader user={user} setUser={setUser} />
-          <PostDelete user={user} />
-        </>
-      ),
-      loader: async ({ params }) => {
-        const { postId } = params;
-        if (typeof postId !== "string") throw Error("Provided id is not valid");
-        return postId;
-      },
-      errorElement: <ErrorElement />,
-    },
-    {
-      path: "/login",
-      element: <Login />,
-      loader: () => {
-        if (user) return redirect("/");
-        return setUser;
-      },
-    },
-    {
-      path: "/signup",
-      element: <SignUp />,
-      loader: () => {
-        if (user) return redirect("/");
-        return null;
-      },
-    },
-  ]);
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route
+        element={
+          <div>
+            <Outlet />
+          </div>
+        }
+      >
+        <Route index element={<Navigate to="posts" replace />} />
+        <Route
+          path="login"
+          element={<Login />}
+          loader={() => {
+            if (user) return redirect("/");
+            return setUser;
+          }}
+        />
+        <Route
+          path="signup"
+          element={<SignUp />}
+          loader={() => {
+            if (user) return redirect("/");
+            return setUser;
+          }}
+        />
+        <Route
+          path="posts"
+          element={
+            <>
+              <PostHeader user={user} setUser={setUser} />
+              <Outlet />
+            </>
+          }
+        >
+          <Route
+            index
+            element={<PostList user={user} />}
+            loader={async () => {
+              if (!user) throw Error("Please login or sign up");
+              await queryClient.fetchQuery(["posts"], getPostList);
+              await queryClient.fetchQuery(["userData"], () =>
+                getUserInfo(user)
+              );
+              return null;
+            }}
+            errorElement={<ErrorElement />}
+          />
+          <Route
+            path="create"
+            element={<PostCreate user={user} />}
+            errorElement={<ErrorElement />}
+          />
+          <Route
+            path=":postId/edit"
+            element={<PostEdit user={user} />}
+            loader={async ({ params }) => {
+              const { postId } = params;
+              if (typeof postId !== "string")
+                throw Error("Provided id is not valid");
+              const postDetail: PostDataInterface = await postEditLoader(
+                postId,
+                user,
+                queryClient
+              );
+              if (postDetail instanceof Error) throw postDetail;
+              return postDetail;
+            }}
+            errorElement={<ErrorElement />}
+          />
+          <Route
+            path=":postId/delete"
+            element={<PostDelete user={user} />}
+            loader={async ({ params }) => {
+              const { postId } = params;
+              if (typeof postId !== "string")
+                throw Error("Provided id is not valid");
+              return postId;
+            }}
+            errorElement={<ErrorElement />}
+          />
+        </Route>
+      </Route>
+    )
+  );
 
   return (
     <QueryClientProvider client={queryClient}>
