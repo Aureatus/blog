@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import editPost from "../../helpers/posts/editPost";
@@ -11,6 +12,9 @@ import TitleField from "./TitleField";
 
 const PostEdit = ({ user }: UserStateInterface) => {
   if (!user) return null;
+
+  const queryClient = useQueryClient();
+
   const postDetail = useLoaderData() as PostDataInterface;
 
   const [title, setTitle] = useState(postDetail.title);
@@ -48,7 +52,7 @@ const PostEdit = ({ user }: UserStateInterface) => {
                 setTitleError,
                 setContentError,
                 setPublishedError
-              );
+              ).then(() => queryClient.invalidateQueries(["posts"]));
             }}
           >
             <TitleField
