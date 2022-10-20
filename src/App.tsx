@@ -53,7 +53,7 @@ const App = () => {
           element={<Login />}
           loader={() => {
             if (user) return redirect("/");
-            return setUser;
+            return null;
           }}
         />
         <Route
@@ -61,7 +61,7 @@ const App = () => {
           element={<SignUp />}
           loader={() => {
             if (user) return redirect("/");
-            return setUser;
+            return null;
           }}
         />
         <Route
