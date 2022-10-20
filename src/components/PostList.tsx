@@ -9,9 +9,9 @@ const PostList = () => {
     () => getPostList()
   );
 
-  if (!data) return null;
   if (isLoading) return null;
   if (isError && error instanceof Error) return <p>{error.message}</p>;
+  if (!data) return null;
 
   return (
     <div className="box p-4 m-5">
