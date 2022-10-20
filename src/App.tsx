@@ -56,7 +56,7 @@ const App = () => {
           <PostDetail user={user} />
         </>
       ),
-      loader: async (request) => detailLoader(request, queryClient),
+      loader: (request) => detailLoader(request, queryClient),
       errorElement: <ErrorElement />,
     },
     {
