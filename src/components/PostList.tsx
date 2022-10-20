@@ -11,7 +11,19 @@ const PostList = () => {
   );
 
   if (isLoading) return <LoadingElement />;
-  if (isError && error instanceof Error) throw error;
+  if (isError && error instanceof Error) {
+    return (
+      <div className="hero is-danger">
+        <div className="hero-body">
+          <div className="container">
+            <h1 className="title is-size-1 has-text-centered is-capitalized ">
+              There was an error loading posts.
+            </h1>
+          </div>
+        </div>
+      </div>
+    );
+  }
   if (!data) return null;
 
   return (
