@@ -40,13 +40,7 @@ const App = () => {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route
-        element={
-          <div>
-            <Outlet />
-          </div>
-        }
-      >
+      <Route element={<Outlet />}>
         <Route index element={<Navigate to="posts" replace />} />
         <Route
           path="login"
