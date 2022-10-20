@@ -37,7 +37,10 @@ const App = () => {
 
   const router2 = createBrowserRouter(
     createRoutesFromElements(
-      <Route element={<Outlet />}>
+      <Route
+        element={<Outlet />}
+        errorElement={<ErrorElement providedError={null} />}
+      >
         <Route index element={<Navigate to="posts" replace />} />
         <Route
           path="login"
@@ -62,13 +65,11 @@ const App = () => {
             index
             element={<PostList />}
             loader={() => listLoader(queryClient)}
-            errorElement={<ErrorElement providedError={null} />}
           />
           <Route
             path=":postId"
             element={<PostDetail user={user} />}
             loader={(request) => detailLoader(request, queryClient)}
-            errorElement={<ErrorElement providedError={null} />}
           />
         </Route>
       </Route>
