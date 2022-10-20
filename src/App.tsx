@@ -78,8 +78,8 @@ const App = () => {
             element={<PostList user={user} />}
             loader={async () => {
               if (!user) throw Error("Please login or sign up");
-              await queryClient.fetchQuery(["posts"], getPostList);
-              await queryClient.fetchQuery(["userData"], () =>
+              await queryClient.prefetchQuery(["posts"], getPostList);
+              await queryClient.prefetchQuery(["userData"], () =>
                 getUserInfo(user)
               );
               return null;
