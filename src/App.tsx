@@ -23,6 +23,7 @@ import PostDelete from "./components/PostDelete";
 import PostCreate from "./components/PostCreate/PostCreate";
 import loginLoader from "./lib/loaders/loginLoader";
 import signUpLoader from "./lib/loaders/signUpLoader";
+import deleteLoader from "./lib/loaders/deleteLoader";
 
 const queryClient = new QueryClient();
 
@@ -106,12 +107,7 @@ const App = () => {
           <Route
             path=":postId/delete"
             element={<PostDelete user={user} />}
-            loader={async ({ params }) => {
-              const { postId } = params;
-              if (typeof postId !== "string")
-                throw Error("Provided id is not valid");
-              return postId;
-            }}
+            loader={deleteLoader}
             errorElement={<ErrorElement providedError={null} />}
           />
         </Route>
