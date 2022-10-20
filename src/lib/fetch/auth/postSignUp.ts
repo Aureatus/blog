@@ -25,7 +25,7 @@ const postSignUp = async (
     if (!response.ok) throw new Error(` ${await response.text()}`);
     return response.status;
   } catch (err) {
-    if (err instanceof Error) return err;
+    if (err instanceof Error) throw err;
     return "Unknown error";
   }
 };

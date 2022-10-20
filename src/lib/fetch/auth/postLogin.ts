@@ -13,7 +13,7 @@ const postLogin = async (username: string, password: string) => {
     if (!response.ok) throw new Error(`${await response.text()}`);
     return await response.json();
   } catch (err) {
-    if (err instanceof Error) return err;
+    if (err instanceof Error) throw err;
     return new Error("Unknown error");
   }
 };

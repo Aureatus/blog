@@ -5,7 +5,7 @@ const getComments = async (id: string) => {
       throw new Error(`${response.status} ${response.statusText}`);
     return await response.json();
   } catch (err) {
-    if (err instanceof Error) return err.message;
+    if (err instanceof Error) throw err;
     return "Unknown error";
   }
 };
