@@ -1,5 +1,5 @@
 const postComment = async (
-  blogId: string,
+  postId: string,
   commentText: string,
   bearerToken: string
 ) => {
@@ -13,7 +13,7 @@ const postComment = async (
   };
   try {
     const response = await fetch(
-      `http://localhost:3000/comments/${blogId}/create`,
+      `http://localhost:3000/comments/${postId}/create`,
       options
     );
     if (response.status !== 200) throw new Error(` ${await response.text()}`);

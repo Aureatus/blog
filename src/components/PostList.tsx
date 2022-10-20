@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import BlogDataInterface from "../interfaces/BlogDataInterface";
-import getBlogList from "../lib/fetch/getBlogList";
+import PostDataInterface from "../interfaces/PostDataInterface";
+import getPostList from "../lib/fetch/getPostList";
 
-const BlogList = () => {
-  const { data, isLoading, isError, error } = useQuery<BlogDataInterface[]>(
-    ["blogs"],
-    () => getBlogList()
+const PostList = () => {
+  const { data, isLoading, isError, error } = useQuery<PostDataInterface[]>(
+    ["posts"],
+    () => getPostList()
   );
 
   if (!data) return null;
@@ -16,9 +16,9 @@ const BlogList = () => {
   return (
     <div className="box p-4 m-5">
       <div className="columns is-multiline is-centered is-vcentered p-4">
-        {data.map((blog: BlogDataInterface) => {
+        {data.map((post: PostDataInterface) => {
           // eslint-disable-next-line @typescript-eslint/naming-convention
-          const { title, timestamp, author, published, _id } = blog;
+          const { title, timestamp, author, published, _id } = post;
 
           if (!published) return null;
 
@@ -49,4 +49,4 @@ const BlogList = () => {
   );
 };
 
-export default BlogList;
+export default PostList;

@@ -8,12 +8,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { useEffect, useState } from "react";
 import Login from "./components/auth/Login/Login";
-import BlogDetail from "./components/BlogDetail/BlogDetail";
+import PostDetail from "./components/PostDetail/PostDetail";
 import BlogHeader from "./components/BlogHeader";
-import BlogList from "./components/BlogList";
+import PostList from "./components/PostList";
 import SignUp from "./components/auth/SignUp/SignUp";
-import getBlogList from "./lib/fetch/getBlogList";
-import getBlog from "./lib/fetch/getBlog";
+import getPostList from "./lib/fetch/getPostList";
+import getPost from "./lib/fetch/getPost";
 import getComments from "./lib/fetch/getComments";
 import ErrorElement from "./components/ErrorElement";
 
@@ -35,38 +35,38 @@ const App = () => {
   const router = createBrowserRouter([
     {
       index: true,
-      element: <Navigate to="/blogs" replace />,
+      element: <Navigate to="/posts" replace />,
     },
     {
-      path: "/blogs",
+      path: "/posts",
       element: (
         <>
           <BlogHeader user={user} setUser={setUser} />
-          <BlogList />
+          <PostList />
         </>
       ),
       loader: async () => {
-        const data = await queryClient.fetchQuery(["blogs"], getBlogList);
+        const data = await queryClient.fetchQuery(["posts"], getPostList);
         return data;
       },
       errorElement: <ErrorElement />,
     },
     {
-      path: "/blogs/:blogId",
+      path: "/posts/:postId",
       element: (
         <>
           <BlogHeader user={user} setUser={setUser} />
-          <BlogDetail user={user} />
+          <PostDetail user={user} />
         </>
       ),
       loader: async ({ params }) => {
-        const { blogId } = params;
-        if (typeof blogId !== "string") return null;
-        await queryClient.fetchQuery(["blogs", blogId], () => getBlog(blogId));
-        await queryClient.fetchQuery(["comments", blogId], () =>
-          getComments(blogId)
+        const { postId } = params;
+        if (typeof postId !== "string") return null;
+        await queryClient.fetchQuery(["posts", postId], () => getPost(postId));
+        await queryClient.fetchQuery(["comments", postId], () =>
+          getComments(postId)
         );
-        return blogId;
+        return postId;
       },
       errorElement: <ErrorElement />,
     },

@@ -2,7 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import postComment from "../../lib/fetch/postComment";
 
-const CommentForm = ({ user, blogId }: { user: string; blogId: string }) => {
+const CommentForm = ({ user, postId }: { user: string; postId: string }) => {
   const [commentText, setCommentText] = useState("");
   const [commentError, setCommentError] = useState<Error | null>(null);
 
@@ -10,9 +10,9 @@ const CommentForm = ({ user, blogId }: { user: string; blogId: string }) => {
 
   const createComment = async () => {
     try {
-      const commentResponse = await postComment(blogId, commentText, user);
+      const commentResponse = await postComment(postId, commentText, user);
       if (commentResponse instanceof Error) throw commentResponse;
-      queryClient.invalidateQueries(["comments", blogId]);
+      queryClient.invalidateQueries(["comments", postId]);
       setCommentError(null);
     } catch (err) {
       if (err instanceof Error) setCommentError(err);

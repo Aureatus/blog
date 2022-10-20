@@ -14,10 +14,10 @@ interface CommentInterface {
   _id: string;
 }
 
-const CommentList = ({ blogId }: { blogId: string }) => {
+const CommentList = ({ postId }: { postId: string }) => {
   const { data, isLoading, isError, error } = useQuery(
-    ["comments", blogId],
-    () => getComments(blogId)
+    ["comments", postId],
+    () => getComments(postId)
   );
 
   if (isLoading) return null;

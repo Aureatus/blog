@@ -1,19 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import BlogDataInterface from "../../interfaces/BlogDataInterface";
-import getBlog from "../../lib/fetch/getBlog";
+import PostDataInterface from "../../interfaces/PostDataInterface";
+import getPost from "../../lib/fetch/getPost";
 
-const BlogInfo = ({ blogId }: { blogId: string }) => {
-  const { data, isLoading, isError, error } = useQuery(["blogs", blogId], () =>
-    getBlog(blogId)
+const PostInfo = ({ postId }: { postId: string }) => {
+  const { data, isLoading, isError, error } = useQuery(["posts", postId], () =>
+    getPost(postId)
   );
 
   if (isLoading) return null;
   if (isError && error instanceof Error) return <p>{error.message}</p>;
 
-  const blogObject = data.reduce((blog: BlogDataInterface) => blog);
+  const postObject = data.reduce((post: PostDataInterface) => post);
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { title, content, timestamp, author, published, _id } = blogObject;
+  const { title, content, timestamp, author, published, _id } = postObject;
 
   if (!published) return null;
 
@@ -33,4 +33,4 @@ const BlogInfo = ({ blogId }: { blogId: string }) => {
   );
 };
 
-export default BlogInfo;
+export default PostInfo;

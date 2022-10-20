@@ -1,6 +1,6 @@
 const getComments = async (id: string) => {
   try {
-    const response = await fetch(`http://localhost:3000/comments/blog/${id}`);
+    const response = await fetch(`http://localhost:3000/comments/post/${id}`);
     if (response.status !== 200)
       throw new Error(`${response.status} ${response.statusText}`);
     return await response.json();
