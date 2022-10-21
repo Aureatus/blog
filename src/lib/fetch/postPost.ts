@@ -19,8 +19,8 @@ const postPost = async (
     if (!response.ok) throw new Error(`${await response.text()}`);
     return await response.text();
   } catch (err) {
-    if (err instanceof Error) return err;
-    return new Error("Unknown error");
+    if (err instanceof Error) throw err;
+    throw Error("Unknown error");
   }
 };
 

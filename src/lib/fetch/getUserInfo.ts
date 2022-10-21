@@ -10,8 +10,8 @@ const getUserInfo = async (bearerToken: string) => {
     if (!response.ok) throw new Error(` ${await response.text()}`);
     return await response.json();
   } catch (err) {
-    if (err instanceof Error) return err;
-    return "Unknown error";
+    if (err instanceof Error) throw err;
+    throw Error("Unknown error");
   }
 };
 
