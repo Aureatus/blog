@@ -32,9 +32,9 @@ const CommentList = ({ postId }: { postId: string }) => {
     <div className="columns is-multiline is-centered is-vcentered p-4 ">
       {data.map((comment: CommentInterface) => {
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        const { text, timestamp, author, _id } = comment;
+        const { text, timestamp, author, _id: id } = comment;
         return (
-          <div key={_id} className="column column is-one-third">
+          <div key={id} className="column column is-one-third">
             <div className="message is-primary">
               <div className="message-header">
                 <h2 className="is-size-4">{`${author.given_name} ${author.family_name}`}</h2>
