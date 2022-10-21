@@ -22,12 +22,12 @@ const PostList = () => {
       <div className="columns is-multiline is-centered is-vcentered p-4">
         {data.map((post: PostDataInterface) => {
           // eslint-disable-next-line @typescript-eslint/naming-convention
-          const { title, timestamp, author, published, _id } = post;
+          const { title, timestamp, author, published, _id: id } = post;
 
           if (!published) return null;
 
           return (
-            <Link key={_id} to={_id} className="column is-one-third">
+            <Link key={id} to={id} className="column is-one-third">
               <div className="card">
                 <header className="card-header has-background-primary	">
                   <p className="card-header-title title is-3">{title}</p>
