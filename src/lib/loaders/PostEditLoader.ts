@@ -1,5 +1,4 @@
 import { QueryClient } from "@tanstack/react-query";
-import PostDataInterface from "../../interfaces/PostDataInterface";
 import getPost from "../fetch/getPost";
 import getUserInfo from "../fetch/getUserInfo";
 
@@ -17,13 +16,11 @@ const postEditLoader = async (
     const postData = await queryClient.fetchQuery(["posts", postId], () =>
       getPost(postId)
     );
-    const postDetail = postData.reduce((post: PostDataInterface) => post);
-
     // eslint-disable-next-line no-underscore-dangle
-    if (userInfo._id !== postDetail.author._id)
+    if (userInfo._id !== postData.author._id)
       throw new Error("This isn't your post.");
 
-    return postDetail;
+    return postData;
   } catch (err) {
     return err;
   }
