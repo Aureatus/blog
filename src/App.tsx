@@ -14,11 +14,11 @@ import PostDetail from "./components/PostDetail/PostDetail";
 import BlogHeader from "./components/BlogHeader";
 import PostList from "./components/PostList";
 import SignUp from "./components/auth/SignUp/SignUp";
-import ErrorElement from "./components/ErrorElement";
 import loginLoader from "./lib/loaders/loginLoader";
 import signUpLoader from "./lib/loaders/signUpLoader";
 import detailLoader from "./lib/loaders/detailLoader";
 import listLoader from "./lib/loaders/listLoader";
+import RouteErrorElement from "./components/RouteErrorElement";
 
 const queryClient = new QueryClient();
 
@@ -37,10 +37,7 @@ const App = () => {
 
   const router2 = createBrowserRouter(
     createRoutesFromElements(
-      <Route
-        element={<Outlet />}
-        errorElement={<ErrorElement providedError={null} />}
-      >
+      <Route element={<Outlet />} errorElement={<RouteErrorElement />}>
         <Route index element={<Navigate to="posts" replace />} />
         <Route
           path="login"
