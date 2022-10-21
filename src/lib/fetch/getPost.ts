@@ -5,8 +5,8 @@ const getPost = async (id: string) => {
       throw new Error(`${response.status} ${response.statusText}`);
     return await response.json();
   } catch (err) {
-    if (err instanceof Error) return err;
-    return "Unknown error";
+    if (err instanceof Error) throw err;
+    throw Error("Unknown error");
   }
 };
 
