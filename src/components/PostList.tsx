@@ -18,7 +18,8 @@ const PostList = ({ user }: UserStateInterface) => {
   );
   if (isLoading || userDataLoading) return <p>loading</p>;
   if (isError && error instanceof Error)
-    return <ErrorElement providedError={error} />;
+    return <ErrorElement message="There was an error loading posts." />;
+
   if (!data) return null;
 
   const { _id: userId } = userData;
