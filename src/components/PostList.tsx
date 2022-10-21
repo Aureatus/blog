@@ -5,6 +5,7 @@ import UserStateInterface from "../interfaces/UserStateInterface";
 import getPostList from "../lib/fetch/getPostList";
 import getUserInfo from "../lib/fetch/getUserInfo";
 import ErrorElement from "./ErrorElement";
+import LoadingElement from "./LoadingElement";
 
 const PostList = ({ user }: UserStateInterface) => {
   if (!user) return null;
@@ -16,7 +17,7 @@ const PostList = ({ user }: UserStateInterface) => {
     ["userData"],
     () => getUserInfo(user)
   );
-  if (isLoading || userDataLoading) return <p>loading</p>;
+  if (isLoading || userDataLoading) return <LoadingElement />;
   if (isError && error instanceof Error)
     return <ErrorElement message="There was an error loading posts." />;
 
