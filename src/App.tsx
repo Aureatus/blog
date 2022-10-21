@@ -40,7 +40,10 @@ const App = () => {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route element={<Outlet />}>
+      <Route
+        element={<Outlet />}
+        errorElement={<ErrorElement providedError={null} />}
+      >
         <Route index element={<Navigate to="posts" replace />} />
         <Route
           path="login"
@@ -72,24 +75,17 @@ const App = () => {
               );
               return null;
             }}
-            errorElement={<ErrorElement providedError={null} />}
           />
-          <Route
-            path="create"
-            element={<PostCreate user={user} />}
-            errorElement={<ErrorElement providedError={null} />}
-          />
+          <Route path="create" element={<PostCreate user={user} />} />
           <Route
             path=":postId/edit"
             element={<PostEdit user={user} />}
             loader={async (request) => editLoader(request, user, queryClient)}
-            errorElement={<ErrorElement providedError={null} />}
           />
           <Route
             path=":postId/delete"
             element={<PostDelete user={user} />}
             loader={deleteLoader}
-            errorElement={<ErrorElement providedError={null} />}
           />
         </Route>
       </Route>
