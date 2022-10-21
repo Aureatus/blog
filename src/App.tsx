@@ -69,6 +69,12 @@ const App = () => {
             loader={(request) => detailLoader(request, queryClient)}
           />
         </Route>
+        <Route
+          path="*"
+          loader={() => {
+            throw Error("404 Not found");
+          }}
+        />
       </Route>
     )
   );
