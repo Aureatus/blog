@@ -21,6 +21,8 @@ const postDetailGet = async (
   next: NextFunction
 ) => {
   try {
+    if (!isValidObjectId(req.params.id))
+      return res.status(404).send("Invalid post id");
     const postList = await Post.find({ _id: req.params.id }).populate({
       path: "author",
       model: "User",
