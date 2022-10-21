@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import PostDataInterface from "../../interfaces/PostDataInterface";
 import getPost from "../../lib/fetch/getPost";
 import ErrorElement from "../ErrorElement";
 import LoadingElement from "../LoadingElement";
@@ -13,10 +12,8 @@ const PostInfo = ({ postId }: { postId: string }) => {
   if (isError && error instanceof Error)
     return <ErrorElement message="There was an error loading this post." />;
 
-  const postObject = data.reduce((post: PostDataInterface) => post);
-
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { title, content, timestamp, author, published, _id } = postObject;
+  const { title, content, timestamp, author, published, _id } = data;
 
   if (!published) return null;
 
