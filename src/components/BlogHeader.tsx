@@ -6,7 +6,7 @@ const BlogHeader = ({ user, setUser }: UserStateInterface) => (
   <header className="level p-5">
     <section className="level-left">
       <div className="level-item">
-        <h1 className="title is-1">Blog project</h1>
+        <h1 className="title is-1">Blog Reading</h1>
       </div>
     </section>
     <section className="level-right">
