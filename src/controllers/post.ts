@@ -23,11 +23,11 @@ const postDetailGet = async (
   try {
     if (!isValidObjectId(req.params.id))
       return res.status(404).send("Invalid post id");
-    const postList = await Post.find({ _id: req.params.id }).populate({
+    const postDetail = await Post.findOne({ _id: req.params.id }).populate({
       path: "author",
       model: "User",
     });
-    return res.status(200).send(postList);
+    return res.status(200).send(postDetail);
   } catch (err) {
     return next(err);
   }
