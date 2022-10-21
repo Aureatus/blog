@@ -12,13 +12,12 @@ const PostInfo = ({ postId }: { postId: string }) => {
   if (isError && error instanceof Error)
     return <ErrorElement message="There was an error loading this post." />;
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { title, content, timestamp, author, published, _id } = data;
+  const { title, content, timestamp, author, published, _id: id } = data;
 
   if (!published) return null;
 
   return (
-    <div key={_id} className="section box">
+    <div key={id} className="section box">
       <div className="level">
         <div>
           <h1 className="title is-2">{title}</h1>
