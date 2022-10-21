@@ -23,7 +23,7 @@ const postDetailGet = async (
   try {
     if (!isValidObjectId(req.params.id))
       return res.status(404).send("Invalid post id");
-    const postDetail = await Post.findOne({ _id: req.params.id }).populate({
+    const postDetail = await Post.findById(req.params.id).populate({
       path: "author",
       model: "User",
     });
