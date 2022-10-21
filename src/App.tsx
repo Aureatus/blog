@@ -13,7 +13,7 @@ import PostHeader from "./components/PostHeader";
 import PostList from "./components/PostList";
 import SignUp from "./components/auth/SignUp/SignUp";
 import getPostList from "./lib/fetch/getPostList";
-import ErrorElement from "./components/ErrorElement";
+import RouteErrorElement from "./components/RouteErrorElement";
 import getUserInfo from "./lib/fetch/getUserInfo";
 import PostEdit from "./components/PostEdit/PostEdit";
 import PostDelete from "./components/PostDelete";
@@ -40,10 +40,7 @@ const App = () => {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route
-        element={<Outlet />}
-        errorElement={<ErrorElement providedError={null} />}
-      >
+      <Route element={<Outlet />} errorElement={<RouteErrorElement />}>
         <Route index element={<Navigate to="posts" replace />} />
         <Route
           path="login"
