@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import PostDataInterface from "../../interfaces/PostDataInterface";
 import getPost from "../../lib/fetch/getPost";
+import ErrorElement from "../ErrorElement";
 import LoadingElement from "../LoadingElement";
 
 const PostInfo = ({ postId }: { postId: string }) => {
@@ -10,17 +11,7 @@ const PostInfo = ({ postId }: { postId: string }) => {
 
   if (isLoading) return <LoadingElement />;
   if (isError && error instanceof Error)
-    return (
-      <div className="hero is-danger">
-        <div className="hero-body">
-          <div className="container">
-            <h1 className="title is-size-1 has-text-centered is-capitalized ">
-              There was an error loading this post.
-            </h1>
-          </div>
-        </div>
-      </div>
-    );
+    return <ErrorElement message="There was an error loading this post." />;
 
   const postObject = data.reduce((post: PostDataInterface) => post);
 

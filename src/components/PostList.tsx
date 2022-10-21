@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import PostDataInterface from "../interfaces/PostDataInterface";
 import getPostList from "../lib/fetch/getPostList";
+import ErrorElement from "./ErrorElement";
 import LoadingElement from "./LoadingElement";
 
 const PostList = () => {
@@ -12,17 +13,7 @@ const PostList = () => {
 
   if (isLoading) return <LoadingElement />;
   if (isError && error instanceof Error) {
-    return (
-      <div className="hero is-danger">
-        <div className="hero-body">
-          <div className="container">
-            <h1 className="title is-size-1 has-text-centered is-capitalized ">
-              There was an error loading posts.
-            </h1>
-          </div>
-        </div>
-      </div>
-    );
+    return <ErrorElement message="There was an error loading posts." />;
   }
   if (!data) return null;
 
