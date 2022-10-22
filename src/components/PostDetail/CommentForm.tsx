@@ -20,9 +20,10 @@ const CommentForm = ({ user, postId }: { user: string; postId: string }) => {
 
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        createComment();
+        await createComment();
+        setCommentText("");
       }}
     >
       <div className="field">
