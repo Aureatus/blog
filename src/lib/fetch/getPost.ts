@@ -1,7 +1,7 @@
 const getPost = async (id: string) => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_restBlogAPIprefix}posts/${id}`
+      `${import.meta.env.VITE_restBlogAPIprefix}/posts/${id}`
     );
     if (!response.ok)
       throw new Error(`${response.status} ${response.statusText}`);
