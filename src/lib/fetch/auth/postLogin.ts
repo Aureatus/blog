@@ -9,7 +9,10 @@ const postLogin = async (username: string, password: string) => {
     body: new URLSearchParams(loginDetails),
   };
   try {
-    const response = await fetch(`http://localhost:3000/login`, options);
+    const response = await fetch(
+      `${import.meta.env.VITE_restBlogAPIprefix}/login`,
+      options
+    );
     if (!response.ok) throw new Error(`${await response.text()}`);
     return await response.json();
   } catch (err) {

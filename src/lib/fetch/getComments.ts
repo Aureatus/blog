@@ -1,6 +1,8 @@
 const getComments = async (id: string) => {
   try {
-    const response = await fetch(`http://localhost:3000/comments/post/${id}`);
+    const response = await fetch(
+      `${import.meta.env.VITE_restBlogAPIprefix}/comments/post/${id}`
+    );
     if (!response.ok)
       throw new Error(`${response.status} ${response.statusText}`);
     return await response.json();

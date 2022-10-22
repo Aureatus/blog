@@ -21,7 +21,10 @@ const postSignUp = async (
     body: new URLSearchParams(signUpDetails),
   };
   try {
-    const response = await fetch(`http://localhost:3000/signup`, options);
+    const response = await fetch(
+      `${import.meta.env.VITE_restBlogAPIprefix}/signup`,
+      options
+    );
     if (!response.ok) throw new Error(` ${await response.text()}`);
     return response.status;
   } catch (err) {

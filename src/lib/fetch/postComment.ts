@@ -13,7 +13,7 @@ const postComment = async (
   };
   try {
     const response = await fetch(
-      `http://localhost:3000/comments/${postId}/create`,
+      `${import.meta.env.VITE_restBlogAPIprefix}/comments/${postId}/create`,
       options
     );
     if (!response.ok) throw Error(` ${await response.text()}`);
