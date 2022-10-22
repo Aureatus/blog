@@ -8,7 +8,8 @@ import ErrorElement from "./ErrorElement";
 import LoadingElement from "./LoadingElement";
 
 const PostList = ({ user }: UserStateInterface) => {
-  if (!user) return null;
+  if (!user)
+    return <ErrorElement message="Please login or sign up to see your posts" />;
   const { data, isLoading, isError, error } = useQuery<PostDataInterface[]>(
     ["posts"],
     () => getPostList()
