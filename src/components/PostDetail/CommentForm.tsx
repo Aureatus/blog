@@ -10,8 +10,7 @@ const CommentForm = ({ user, postId }: { user: string; postId: string }) => {
 
   const createComment = async () => {
     try {
-      const commentResponse = await postComment(postId, commentText, user);
-      if (commentResponse instanceof Error) throw commentResponse;
+      await postComment(postId, commentText, user);
       queryClient.invalidateQueries(["comments", postId]);
       setCommentError(null);
     } catch (err) {
