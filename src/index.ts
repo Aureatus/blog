@@ -45,8 +45,8 @@ app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
 app.use("/user", userRouter);
 
-app.use((req, res, next) => {
-  next(res.status(404));
+app.use((req, res) => {
+  res.sendStatus(404);
 });
 
 app.listen(port, () => {
