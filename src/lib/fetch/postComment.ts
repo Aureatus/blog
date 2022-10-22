@@ -17,7 +17,7 @@ const postComment = async (
       options
     );
     if (!response.ok) throw new Error(` ${await response.text()}`);
-    return await response.json();
+    return await response.text();
   } catch (err) {
     if (err instanceof Error) throw err;
     return "Unknown error";
