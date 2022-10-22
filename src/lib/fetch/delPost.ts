@@ -8,7 +8,7 @@ const delPost = async (postId: string, bearerToken: string) => {
   };
   try {
     const response = await fetch(
-      `http://localhost:3000/posts/${postId}/delete`,
+      `${import.meta.env.VITE_restBlogAPIprefix}/posts/${postId}/delete`,
       options
     );
     if (!response.ok) throw new Error(`${await response.text()}`);

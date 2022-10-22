@@ -17,7 +17,7 @@ const putPost = async (
   };
   try {
     const response = await fetch(
-      `http://localhost:3000/posts/${postId}/update`,
+      `${import.meta.env.VITE_restBlogAPIprefix}/posts/${postId}/update`,
       options
     );
     if (!response.ok) throw new Error(`${await response.text()}`);

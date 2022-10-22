@@ -6,7 +6,10 @@ const getUserInfo = async (bearerToken: string) => {
     },
   };
   try {
-    const response = await fetch(`http://localhost:3000/user/info`, options);
+    const response = await fetch(
+      `${import.meta.env.VITE_restBlogAPIprefix}/user/info`,
+      options
+    );
     if (!response.ok) throw new Error(` ${await response.text()}`);
     return await response.json();
   } catch (err) {

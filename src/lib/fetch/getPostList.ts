@@ -1,6 +1,8 @@
 const getPostList = async () => {
   try {
-    const response = await fetch("http://localhost:3000/posts");
+    const response = await fetch(
+      `${import.meta.env.VITE_restBlogAPIprefix}/posts`
+    );
     if (!response.ok)
       throw new Error(`${response.status} ${response.statusText}`);
     return await response.json();

@@ -15,7 +15,10 @@ const postPost = async (
     body: new URLSearchParams(postDetails),
   };
   try {
-    const response = await fetch(`http://localhost:3000/posts/create`, options);
+    const response = await fetch(
+      `${import.meta.env.VITE_restBlogAPIprefix}/posts/create`,
+      options
+    );
     if (!response.ok) throw new Error(`${await response.text()}`);
     return await response.text();
   } catch (err) {
