@@ -22,6 +22,7 @@ import loginLoader from "./lib/loaders/loginLoader";
 import signUpLoader from "./lib/loaders/signUpLoader";
 import deleteLoader from "./lib/loaders/deleteLoader";
 import editLoader from "./lib/loaders/editLoader";
+import listLoader from "./lib/loaders/listLoader";
 
 const queryClient = new QueryClient();
 
@@ -64,14 +65,7 @@ const App = () => {
           <Route
             index
             element={<PostList user={user} />}
-            loader={async () => {
-              if (!user) throw Error("Please login or sign up");
-              await queryClient.prefetchQuery(["posts"], getPostList);
-              await queryClient.prefetchQuery(["userData"], () =>
-                getUserInfo(user)
-              );
-              return null;
-            }}
+            loader={() => listLoader(user, queryClient)}
           />
           <Route path="create" element={<PostCreate user={user} />} />
           <Route
