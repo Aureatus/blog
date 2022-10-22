@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 import { isValidObjectId } from "mongoose";
+import Comment from "../models/comment";
 import Post from "../models/post";
 
 const postListGet = async (req: Request, res: Response, next: NextFunction) => {
@@ -120,11 +121,13 @@ const postDelete = async (req: Request, res: Response, next: NextFunction) => {
       post.author &&
       JSON.stringify(post.author).replace(/"/g, "") === userId
     ) {
-      post.delete();
+      await post.delete();
+      await Comment.deleteMany({ post: req.params.id });
       return res.sendStatus(200);
     }
     if (admin) {
-      post.delete();
+      await post.delete();
+      await Comment.deleteMany({ post: req.params.id });
       return res.sendStatus(200);
     }
     return res.status(401).send("You aren't the creator of this post.");
