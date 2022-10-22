@@ -16,7 +16,7 @@ const postComment = async (
       `http://localhost:3000/comments/${postId}/create`,
       options
     );
-    if (!response.ok) throw new Error(` ${await response.text()}`);
+    if (!response.ok) throw Error(` ${await response.text()}`);
     return await response.text();
   } catch (err) {
     if (err instanceof Error) throw err;
