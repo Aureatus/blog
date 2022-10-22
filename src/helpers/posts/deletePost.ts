@@ -9,8 +9,7 @@ const deletePost = async (
 ) => {
   try {
     setSuccess(false);
-    const editResponse = await delPost(postId, bearerToken);
-    if (editResponse instanceof Error) throw editResponse;
+    await delPost(postId, bearerToken);
     setSuccess(true);
     setError(null);
   } catch (err) {

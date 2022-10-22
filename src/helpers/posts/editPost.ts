@@ -16,14 +16,7 @@ const editPost = async (
 ) => {
   try {
     setSuccess(false);
-    const editResponse = await putPost(
-      title,
-      content,
-      published,
-      postId,
-      bearerToken
-    );
-    if (editResponse instanceof Error) throw editResponse;
+    await putPost(title, content, published, postId, bearerToken);
     setSuccess(true);
   } catch (err) {
     if (err instanceof Error) {

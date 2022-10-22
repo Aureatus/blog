@@ -15,13 +15,7 @@ const createPost = async (
 ) => {
   try {
     setSuccess(false);
-    const createResponse = await postPost(
-      title,
-      content,
-      published,
-      bearerToken
-    );
-    if (createResponse instanceof Error) throw createResponse;
+    await postPost(title, content, published, bearerToken);
     setSuccess(true);
   } catch (err) {
     if (err instanceof Error) {
