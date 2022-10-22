@@ -20,14 +20,13 @@ const signUp = async (
   navigate: NavigateFunction
 ) => {
   try {
-    const signUpResponse = await postSignUp(
+    await postSignUp(
       userName,
       givenName,
       familyName,
       password,
       confirmPassword
     );
-    if (signUpResponse instanceof Error) throw signUpResponse;
 
     navigate("/login");
   } catch (err) {
