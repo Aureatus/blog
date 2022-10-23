@@ -5,6 +5,7 @@ import { connect, connection } from "mongoose";
 import passport from "passport";
 import cors from "cors";
 import compression from "compression";
+import helmet from "helmet";
 
 import loginStrategy from "./strategies/login";
 
@@ -21,6 +22,7 @@ const port = process.env.PORT;
 
 app.use(morgan("dev"));
 app.use(compression());
+app.use(helmet());
 app.use(urlencoded({ extended: false }));
 app.use(json());
 app.use(cors());
