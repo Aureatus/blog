@@ -42,12 +42,12 @@ const App = () => {
         <Route
           path="login"
           element={<Login />}
-          loader={() => loginLoader({ user, setUser })}
+          loader={async () => loginLoader({ user, setUser })}
         />
         <Route
           path="signup"
           element={<SignUp />}
-          loader={() => signUpLoader(user)}
+          loader={async () => signUpLoader(user)}
         />
         <Route
           path="posts"
@@ -61,12 +61,12 @@ const App = () => {
           <Route
             index
             element={<PostList />}
-            loader={() => listLoader(queryClient)}
+            loader={async () => listLoader(queryClient)}
           />
           <Route
             path=":postId"
             element={<PostDetail user={user} />}
-            loader={(request) => detailLoader(request, queryClient)}
+            loader={async (request) => detailLoader(request, queryClient)}
           />
         </Route>
         <Route
