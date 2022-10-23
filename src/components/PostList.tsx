@@ -41,7 +41,7 @@ const PostList = ({ user }: UserStateInterface) => {
             // eslint-disable-next-line @typescript-eslint/naming-convention
             const { title, timestamp, author, _id } = post;
             // eslint-disable-next-line no-underscore-dangle
-            if (author._id !== userId) return null;
+            if (author._id !== userId && userData.admin === false) return null;
             return (
               <div key={_id} className="column is-one-third">
                 <div className="card">
