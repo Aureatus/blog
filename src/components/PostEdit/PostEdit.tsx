@@ -5,6 +5,7 @@ import editPost from "../../helpers/posts/editPost";
 import PostDataInterface from "../../interfaces/PostDataInterface";
 import PostResponseErrorInterface from "../../interfaces/PostResponseErrorInterface";
 import UserStateInterface from "../../interfaces/UserStateInterface";
+import ErrorElement from "../ErrorElement";
 import SuccessElement from "../SuccessElement";
 import ContentField from "./ContentField";
 import PublishedField from "./PublishedField";
@@ -15,7 +16,10 @@ const PostEdit = ({ user }: UserStateInterface) => {
 
   const queryClient = useQueryClient();
 
-  const postDetail = useLoaderData() as PostDataInterface;
+  const postDetail = useLoaderData() as PostDataInterface | Error;
+
+  if (postDetail instanceof Error)
+    return <ErrorElement message={postDetail.message} />;
 
   const [title, setTitle] = useState(postDetail.title);
   const [content, setContent] = useState(postDetail.content);
