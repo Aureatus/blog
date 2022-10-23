@@ -20,7 +20,7 @@ const editLoader = async (
       getPost(postId)
     );
     // eslint-disable-next-line no-underscore-dangle
-    if (userInfo._id !== postData.author._id)
+    if (userInfo._id !== postData.author._id && userInfo.admin === false)
       throw new Error("This isn't your post.");
 
     return postData;
