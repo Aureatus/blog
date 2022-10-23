@@ -27,7 +27,12 @@ const PostInfo = ({ postId }: { postId: string }) => {
           Published {new Date(timestamp).toDateString()}
         </h4>
       </div>
-      <p className="is-size-5 has-text-justified">{content}</p>
+      <p
+        className="is-size-5 has-text-justified"
+        style={{ whiteSpace: "pre-line" }}
+      >
+        {content}
+      </p>
     </div>
   );
 };
