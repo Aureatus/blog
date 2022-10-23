@@ -4,6 +4,7 @@ import morgan from "morgan";
 import { connect, connection } from "mongoose";
 import passport from "passport";
 import cors from "cors";
+import compression from "compression";
 
 import loginStrategy from "./strategies/login";
 
@@ -19,10 +20,9 @@ const app: Express = express();
 const port = process.env.PORT;
 
 app.use(morgan("dev"));
-
+app.use(compression());
 app.use(urlencoded({ extended: false }));
 app.use(json());
-
 app.use(cors());
 
 const mongoDB = process.env.mongoConnectionURL;
