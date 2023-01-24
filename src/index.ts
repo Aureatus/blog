@@ -25,7 +25,14 @@ app.use(compression());
 app.use(helmet());
 app.use(urlencoded({ extended: false }));
 app.use(json());
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://blog-frontend-write.vercel.app",
+      "https://blog-frontend-read.vercel.app",
+    ],
+  })
+);
 
 const mongoDB = process.env.mongoConnectionURL;
 if (mongoDB) {
