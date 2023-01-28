@@ -7,6 +7,7 @@ The site for writing blog posts can be found here: https://blog-read.vercel.app
 ## Table of Contents
 * [Features](#features)
 * [Roadmap](#roadmap)
+* [Known Issues](#known-issues)
 * [Tech stack](#tech-stack)
 * [Run locally](#run-locally)
   * [Frontend](#frontend)
