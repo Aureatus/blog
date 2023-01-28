@@ -2,6 +2,8 @@
 # Blog Project
 This is a project consisting of two sites, one for reading blog posts, and one for writing, editing and deleting them.
 
+The site for writing blog posts can be found here: https://blog-read.vercel.app
+
 ## Table of Contents
 * [Features](#features)
 * [Roadmap](#roadmap)
