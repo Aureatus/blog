@@ -20,6 +20,8 @@ The site for writing blog posts can be found here: https://blog-read.vercel.app
   - Users can comment on posts.
 - Users can create posts, and edit or delete them.
   - Can select whether they are published when creating or editing them.
+- Admins can see all posts, whether they are published or not
+  - They can also edit and delete any post.
 
 ## Roadmap
 
