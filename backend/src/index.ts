@@ -27,10 +27,7 @@ app.use(urlencoded({ extended: false }));
 app.use(json());
 app.use(
   cors({
-    origin: [
-      "https://blog-frontend-write.vercel.app",
-      "https://blog-frontend-read.vercel.app",
-    ],
+    origin: ["https://blog-read.vercel.app", "https://blog-write.vercel.app"],
   })
 );
 
