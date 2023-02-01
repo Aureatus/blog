@@ -68,7 +68,7 @@ const postUpdate = [
       }
 
       if (admin) {
-        post.updateOne({
+        await post.updateOne({
           title: req.body.title,
           content: req.body.content,
           published: req.body.published,
