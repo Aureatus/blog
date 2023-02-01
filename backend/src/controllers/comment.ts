@@ -13,6 +13,7 @@ const commentListGet = async (
       .populate({
         path: "author",
         model: "User",
+        select: "given_name family_name",
       });
     return res.status(200).send(comments);
   } catch (err) {

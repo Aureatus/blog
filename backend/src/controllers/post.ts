@@ -9,7 +9,11 @@ const postListGet = async (req: Request, res: Response, next: NextFunction) => {
     const postList = await Post.find(
       {},
       `title timestamp author published _id`
-    ).populate({ path: "author", model: "User" });
+    ).populate({
+      path: "author",
+      model: "User",
+      select: "given_name family_name",
+    });
     return res.status(200).send(postList);
   } catch (err) {
     return next(err);
@@ -27,6 +31,7 @@ const postDetailGet = async (
     const postDetail = await Post.findById(req.params.id).populate({
       path: "author",
       model: "User",
+      select: "given_name family_name",
     });
     return res.status(200).send(postDetail);
   } catch (err) {
