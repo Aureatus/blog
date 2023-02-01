@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import PostDataInterface from "../interfaces/PostDataInterface";
 import getPostList from "../lib/fetch/getPostList";
@@ -10,6 +11,7 @@ const PostList = () => {
     ["posts"],
     () => getPostList()
   );
+  const [linkClicked, setLinkClicked] = useState(false);
 
   if (isLoading) return <LoadingElement />;
   if (isError && error instanceof Error) {
@@ -27,22 +29,33 @@ const PostList = () => {
           if (!published) return null;
 
           return (
-            <Link key={id} to={id} className="column is-one-third">
+            <Link
+              key={id}
+              to={id}
+              className="column is-one-third"
+              onClick={() => setLinkClicked(true)}
+            >
               <div className="card">
                 <header className="card-header has-background-primary	">
                   <p className="card-header-title title is-3">{title}</p>
                 </header>
                 <div className="card-content">
-                  <div className="content">
-                    <p className="subtitle is-5">
-                      Written by{" "}
-                      <strong>{`${author.given_name} ${author.family_name}`}</strong>
-                    </p>
-                  </div>
-                  <p className="subtitle is-5">
-                    Published on:{" "}
-                    <strong>{new Date(timestamp).toDateString()}</strong>
-                  </p>
+                  {linkClicked ? (
+                    <LoadingElement />
+                  ) : (
+                    <>
+                      <div className="content">
+                        <p className="subtitle is-5">
+                          Written by{" "}
+                          <strong>{`${author.given_name} ${author.family_name}`}</strong>
+                        </p>
+                      </div>
+                      <p className="subtitle is-5">
+                        Published on:{" "}
+                        <strong>{new Date(timestamp).toDateString()}</strong>
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
             </Link>

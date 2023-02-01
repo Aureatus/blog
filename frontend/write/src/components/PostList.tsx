@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import PostDataInterface from "../interfaces/PostDataInterface";
 import UserStateInterface from "../interfaces/UserStateInterface";
@@ -18,6 +19,9 @@ const PostList = ({ user }: UserStateInterface) => {
     ["userData"],
     () => getUserInfo(user)
   );
+
+  const [linkClicked, setLinkClicked] = useState(false);
+
   if (isLoading || userDataLoading) return <LoadingElement />;
   if (isError && error instanceof Error)
     return <ErrorElement message="There was an error loading posts." />;
@@ -60,14 +64,26 @@ const PostList = ({ user }: UserStateInterface) => {
                       </p>
                     </div>
                   </div>
-                  <footer className="card-footer">
-                    <Link to={`${_id}/edit`} className="card-footer-item">
-                      Edit
-                    </Link>
-                    <Link to={`${_id}/delete`} className="card-footer-item ">
-                      Delete
-                    </Link>
-                  </footer>
+                  {linkClicked ? (
+                    <LoadingElement />
+                  ) : (
+                    <footer className="card-footer">
+                      <Link
+                        to={`${_id}/edit`}
+                        onClick={() => setLinkClicked(true)}
+                        className="card-footer-item"
+                      >
+                        Edit
+                      </Link>
+                      <Link
+                        to={`${_id}/delete`}
+                        onClick={() => setLinkClicked(true)}
+                        className="card-footer-item "
+                      >
+                        Delete
+                      </Link>
+                    </footer>
+                  )}
                 </div>
               </div>
             );
