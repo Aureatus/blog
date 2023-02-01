@@ -40,8 +40,8 @@ const postDetailGet = async (
 };
 
 const postUpdate = [
-  body("title").isString().notEmpty().trim().escape(),
-  body("content").isString().notEmpty().trim().escape(),
+  body("title").isString().notEmpty().trim(),
+  body("content").isString().notEmpty().trim(),
   body("published").toBoolean().isBoolean(),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -83,8 +83,8 @@ const postUpdate = [
 ];
 
 const postCreate = [
-  body("title").isString().notEmpty().trim().escape(),
-  body("content").isString().notEmpty().trim().escape(),
+  body("title").isString().notEmpty().trim(),
+  body("content").isString().notEmpty().trim(),
   body("published").isBoolean(),
 
   async (req: Request, res: Response, next: NextFunction) => {

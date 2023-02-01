@@ -22,7 +22,7 @@ const commentListGet = async (
 };
 
 const commentCreate = [
-  body("text").isString().notEmpty().trim().escape(),
+  body("text").isString().notEmpty().trim(),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const errors = validationResult(req);

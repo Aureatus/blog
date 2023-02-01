@@ -39,9 +39,9 @@ const logoutPost = async (req: Request, res: Response, next: NextFunction) => {
 
 const signupPost = [
   body("user_name").isEmail().normalizeEmail(),
-  body("given_name").notEmpty().trim().escape(),
-  body("family_name").notEmpty().trim().escape(),
-  body("password").notEmpty().trim().escape(),
+  body("given_name").notEmpty().trim(),
+  body("family_name").notEmpty().trim(),
+  body("password").notEmpty().trim(),
   body("confirm_password").custom((value, { req }) => {
     if (value !== req.body.password) {
       throw new Error("Password confirmation does not match password");
