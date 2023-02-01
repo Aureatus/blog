@@ -33,7 +33,7 @@ The site for writing blog posts can be found here: https://blog-read.vercel.app
 
 - ~~Changing published status of a post doesn't work.~~
 - Admins can edit other peoples posts. Ideally, they should only be able to delete them.
-- Characters that are escaped by express-validator, are not displayed properly, since they're HTML and the post content is just rendered as text.
+- ~~Characters that are escaped by express-validator, are not displayed properly, since they're HTML and the post content is just rendered as text.~~
 - The way loading of data is currently handled, if you're in a different region to where the server is hosted, the site will feel very unresponsive.
 
 ## Tech Stack
