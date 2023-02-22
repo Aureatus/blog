@@ -48,7 +48,7 @@ The site for writing blog posts can be found here: https://blog-write.vercel.app
 Clone the project
 
 ```bash
-  git clone https://github.com/Aureatus/readvocab.git
+  git clone https://github.com/Aureatus/blog.git
 ```
 
 #### Frontend
